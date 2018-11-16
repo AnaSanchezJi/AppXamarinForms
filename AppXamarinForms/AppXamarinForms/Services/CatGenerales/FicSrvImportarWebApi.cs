@@ -33,9 +33,9 @@ namespace AppXamarinForms.Services.CatGenerales
             return response.IsSuccessStatusCode ? JsonConvert.DeserializeObject<List<eva_cat_edificios>>(await response.Content.ReadAsStringAsync()) : null;
         }
 
-        private async Task<eva_cat_edificios> FicExistecat_edificio(eva_cat_edificios edificio)
+        private async Task<eva_cat_edificios> FicExistecat_edificio(int edificio)
         {
-            return await (from inv in FicLoBDContext.eva_cat_edificios where inv.IdEdificio == edificio.IdEdificio select inv).AsNoTracking().SingleOrDefaultAsync();
+            return await (from inv in FicLoBDContext.eva_cat_edificios where inv.IdEdificio == edificio select inv).AsNoTracking().SingleOrDefaultAsync();
         }
 
 
@@ -52,14 +52,25 @@ namespace AppXamarinForms.Services.CatGenerales
                     FicMensaje += "IMPORTANDO: eva_cat_edificios \n";
                     foreach (eva_cat_edificios ed in FicGetReultREST)
                     {                        
-                        var respuesta = await FicExistecat_edificio(ed);
+                        var respuesta = await FicExistecat_edificio(ed.IdEdificio);
                         if (respuesta != null)
                         {
                             try
                             {
-                                FicLoBDContext.Update(ed);
-                                FicLoBDContext.Entry(ed).State = EntityState.Detached;
+                                respuesta.IdEdificio = ed.IdEdificio;
+                                respuesta.Alias = ed.Alias;
+                                respuesta.DesEdificio = ed.DesEdificio;
+                                respuesta.Prioridad = ed.Prioridad;
+                                respuesta.Clave = ed.Clave;
+                                respuesta.FechaReg = ed.FechaReg;
+                                respuesta.FechaUltMod = ed.FechaUltMod;
+                                respuesta.UsuarioMod = ed.UsuarioMod;
+                                respuesta.UsuarioReg = ed.UsuarioReg;
+                                respuesta.Activo = ed.Activo;
+                                respuesta.Borrado = ed.Borrado;
+                                FicLoBDContext.Entry(respuesta).State = EntityState.Modified;                                
                                 FicMensaje += await FicLoBDContext.SaveChangesAsync() > 0 ? "-UPDATE-> IdEdificio: " + ed.IdEdificio + " \n" : "-NO NECESITO ACTUALIZAR->  IdEdificio: " + ed.IdEdificio + " \n";
+                                FicLoBDContext.Entry(ed).State = EntityState.Detached;
                             }
                             catch (Exception e)
                             {
@@ -70,17 +81,16 @@ namespace AppXamarinForms.Services.CatGenerales
                         {
                             try
                             {
-                                FicLoBDContext.Add(ed);
-                                FicLoBDContext.Entry(ed).State = EntityState.Detached;
+                                FicLoBDContext.Add(ed);                                
                                 FicMensaje += await FicLoBDContext.SaveChangesAsync() > 0 ? "-INSERT-> IdEdificio: " + ed.IdEdificio + " \n" : "-ERROR EN INSERT-> IdEdificio: " + ed.IdEdificio + " \n";
+                                FicLoBDContext.Entry(ed).State = EntityState.Detached;
                             }
                             catch (Exception e)
                             {
                                 FicMensaje += "-ALERTA-> .," + e.Message.ToString() + " \n";
                             }
                         }
-                    }
-                    FicMensaje += "Ok";
+                    }                    
                 }
                 else
                 {

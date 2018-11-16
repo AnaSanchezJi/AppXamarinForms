@@ -10,6 +10,7 @@
                 </StackLayout>
                 <StackLayout Padding="10" Orientation="Horizontal" VerticalOptions="End" HorizontalOptions="Center">
                     <Button Text="IMP. CATALOGO Edifici."  Command="{Binding FicMecImportEdi}"/>
+                    <!--ImportCommand-->
                 </StackLayout>
             </StackLayout>
         </ScrollView>

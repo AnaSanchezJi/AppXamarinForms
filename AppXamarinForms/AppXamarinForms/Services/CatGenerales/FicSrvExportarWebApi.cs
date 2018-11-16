@@ -27,10 +27,9 @@ namespace AppXamarinForms.Services.CatGenerales
             FiClient.MaxResponseContentBufferSize = 256000;
 
         }
-
-       private async Task<string> FicPostListInventarios(eva_cat_list_edificios ed)
+       private async Task<string> FicPostListInventarios(List<eva_cat_edificios> ed)
         {
-                const string url = "http://localhost:51049/api/AddEdificios";
+                const string url = "http://localhost:51049/api/ExpEdificios";
                 HttpResponseMessage response = await FiClient.PostAsync(
                     new Uri(string.Format(url, string.Empty)),
                     new StringContent(JsonConvert.SerializeObject(ed), Encoding.UTF8, "application/json"));
@@ -39,10 +38,11 @@ namespace AppXamarinForms.Services.CatGenerales
 
         public async Task<string> FicPostExportEdificios()
         {
-            return await FicPostListInventarios(new eva_cat_list_edificios()
-            {
-                eva_cat_edificios = await (from ed in FicLoDBContext.eva_cat_edificios select ed).AsNoTracking().ToListAsync()
-            });
-        }       
+            return await FicPostListInventarios(
+                await (from edi in FicLoDBContext.eva_cat_edificios select edi).AsNoTracking().ToListAsync());
+            
+        }
+
+        
     }
 }

@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace AppXamarinForms.Interface.CatGenerales
 {
-   public interface IFicSrvExportarWebApi
+    public interface IFicSrvImpExpWebApi
     {
-        Task<string> FicPostExportEdificios();
-        
+        Task<string> FicExportEdificios();
+        Task<string> FicImportEdificios();
     }
 }

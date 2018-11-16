@@ -18,6 +18,7 @@ namespace AppXamarinForms.ViewModels.CatGenerales
 
         private IFicSrvNavegationCatEdificiosList IFicSrvNavigationEdificio;
         private IFicSrvImportarWebApi IFicSrvImportarWebApi;
+        //private IFicSrvExportarWebApi IFicSrvImportarWebApi;
         public FicVmImportarWebApi(IFicSrvNavegationCatEdificiosList IFicSrvNavigationEdificio, IFicSrvImportarWebApi IFicSrvImportarWebApi)
         {
             this.IFicSrvNavigationEdificio = IFicSrvNavigationEdificio;

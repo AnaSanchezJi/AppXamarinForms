@@ -26,6 +26,7 @@ namespace AppXamarinForms.ViewModels.Base
             FicContainerBuilder.RegisterType<FicVmCatEdificiosView>();
             FicContainerBuilder.RegisterType<FicVmExportarWebApi>();
             FicContainerBuilder.RegisterType<FicVmImportarWebApi>();
+            
 
             //------------------------- INTERFACE SERVICES OF THE VIEW MODELS -----------------------------------
 
@@ -35,7 +36,7 @@ namespace AppXamarinForms.ViewModels.Base
             FicContainerBuilder.RegisterType<FicSrvCatEdificiosUpdate>().As<IFicSrvCatEdificiosUpdate>().SingleInstance();
             FicContainerBuilder.RegisterType<FicSrvExportarWebApi>().As<IFicSrvExportarWebApi>().SingleInstance();
             FicContainerBuilder.RegisterType<FicSrvImportarWebApi>().As<IFicSrvImportarWebApi>().SingleInstance();
-
+            
 
             //FIC: se asigna o se libera el contenedor
             //-------------------------------------------
@@ -75,6 +76,7 @@ namespace AppXamarinForms.ViewModels.Base
         public FicVmImportarWebApi FicVmImportarWebApi
         {
             get { return FicIContainer.Resolve<FicVmImportarWebApi>(); }
-        }        
+        }
+        
     }
 }

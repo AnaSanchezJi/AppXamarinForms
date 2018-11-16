@@ -17,8 +17,11 @@ namespace AppXamarinForms.Services
             { typeof(FicVmCatEdificiosAdd),typeof(FicViCatEdificiosAdd) },
             { typeof(FicVmCatEdificiosUpdate),typeof(FicViCatEdificiosUpdate) },
             { typeof(FicVmCatEdificiosView),typeof(FicViCatEdificiosView) },
-            {typeof(FicVmImportarWebApi), typeof(FicViImportarWebApi)},
-            {typeof(FicVmExportarWebApi), typeof(FicViExportarWebApi)}
+            //{typeof(FicVmImportarWebApi), typeof(FicViImportarWebApi)},
+            //{typeof(FicVmExportarWebApi), typeof(FicViExportarWebApi)},
+            //{typeof(FicVmImpExpWebApi), typeof(FicViExportarWebApi) },
+            //{typeof(FicVmImpExpWebApi), typeof(FicViImportarWebApi) }
+
 
 
         };
