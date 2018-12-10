@@ -6,6 +6,6 @@ namespace AppXamarinForms
 {
     public class FicAppSettings
     {
-        public static string FicDataBaseName = "CocacolaNayDB.db3";
+        public static string FicDataBaseName = "AppReva.db3";
     }
 }

@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 using AppXamarinForms.Interface.Navegacion;
-using AppXamarinForms.Interface.CatGenerales;
-using AppXamarinForms.Services.CatGenerales;
+using AppXamarinForms.Interface.AlumnoCarrera;
+using AppXamarinForms.Services.AlumnoCarrera;
 using AppXamarinForms.Services;
 using Autofac;
-using AppXamarinForms.ViewModels.CatGenerales;
+using AppXamarinForms.ViewModels.AlumnoCarrera;
 
 namespace AppXamarinForms.ViewModels.Base
 {
@@ -20,22 +20,22 @@ namespace AppXamarinForms.ViewModels.Base
             var FicContainerBuilder = new ContainerBuilder();
 
             //-------------------------------- VIEW MODELS ------------------------------------------------------           
-            FicContainerBuilder.RegisterType<FicVmCatEdificiosList>();
-            FicContainerBuilder.RegisterType<FicVmCatEdificiosAdd>();
-            FicContainerBuilder.RegisterType<FicVmCatEdificiosUpdate>();
-            FicContainerBuilder.RegisterType<FicVmCatEdificiosView>();
-            FicContainerBuilder.RegisterType<FicVmExportarWebApi>();
-            FicContainerBuilder.RegisterType<FicVmImportarWebApi>();
+            FicContainerBuilder.RegisterType<FicVmAlumnoCarreraList>();
+            FicContainerBuilder.RegisterType<FicVmAlumnoCarreraAdd>();
+            FicContainerBuilder.RegisterType<FicVmAlumnoCarreraUpdate>();
+            FicContainerBuilder.RegisterType<FicVmAlumnoCarreraView>();
+            //FicContainerBuilder.RegisterType<FicVmExportarWebApi>();
+            FicContainerBuilder.RegisterType<FicVmCatEdificiosImportarExportar>();
             
 
             //------------------------- INTERFACE SERVICES OF THE VIEW MODELS -----------------------------------
 
             FicContainerBuilder.RegisterType<FicSrvNavigationCatEdificios>().As<IFicSrvNavegationCatEdificiosList>().SingleInstance();
-            FicContainerBuilder.RegisterType<FicSrvCatEdificiosList>().As<IFicSvrCatEdificiosList>().SingleInstance();
-            FicContainerBuilder.RegisterType<FicSrvCatEdificiosAdd>().As<IFicSrvCatEdificiosAdd>().SingleInstance();
-            FicContainerBuilder.RegisterType<FicSrvCatEdificiosUpdate>().As<IFicSrvCatEdificiosUpdate>().SingleInstance();
-            FicContainerBuilder.RegisterType<FicSrvExportarWebApi>().As<IFicSrvExportarWebApi>().SingleInstance();
-            FicContainerBuilder.RegisterType<FicSrvImportarWebApi>().As<IFicSrvImportarWebApi>().SingleInstance();
+            FicContainerBuilder.RegisterType<FicSrvAlumnoCarreraList>().As<IFicSvrAlumnoCarreraList>().SingleInstance();
+            FicContainerBuilder.RegisterType<FicSrvAlumnoCarreraAdd>().As<IFicSrvAlumnoCarreraAdd>().SingleInstance();
+            FicContainerBuilder.RegisterType<FicSrvAlumnoCarreraUpdate>().As<IFicSrvAlumnoCarreraUpdate>().SingleInstance();
+            //FicContainerBuilder.RegisterType<FicSrvExportarWebApi>().As<IFicSrvExportarWebApi>().SingleInstance();
+            FicContainerBuilder.RegisterType<FicSrvCatEdificiosImportarExportar>().As<IFicSrvCatEdificiosImportarExportar>().SingleInstance();
             
 
             //FIC: se asigna o se libera el contenedor
@@ -48,34 +48,34 @@ namespace AppXamarinForms.ViewModels.Base
         //-------------------- CONTROL DE INVENTARIOS ------------------------
         //FIC: se manda llamar desde el backend de la View de List
        
-        public FicVmCatEdificiosList FicVmCatEdificiosList
+        public FicVmAlumnoCarreraList FicVmAlumnoCarreraList
         {
-            get { return FicIContainer.Resolve<FicVmCatEdificiosList>(); }
+            get { return FicIContainer.Resolve<FicVmAlumnoCarreraList>(); }
         }
 
-        public  FicVmCatEdificiosAdd FicVmCatEdificiosAdd
+        public FicVmAlumnoCarreraAdd FicVmAlumnoCarreraAdd
         {
-            get { return FicIContainer.Resolve<FicVmCatEdificiosAdd>();  }
+            get { return FicIContainer.Resolve<FicVmAlumnoCarreraAdd>();  }
         }
 
-        public FicVmCatEdificiosUpdate FicVmCatEdificiosUpdate
+        public FicVmAlumnoCarreraUpdate FicVmAlumnoCarreraUpdate
         {
-            get { return FicIContainer.Resolve<FicVmCatEdificiosUpdate>(); }
+            get { return FicIContainer.Resolve<FicVmAlumnoCarreraUpdate>(); }
         }
 
-        public FicVmCatEdificiosView FicVmCatEdificiosView
+        public FicVmAlumnoCarreraView FicVmAlumnoCarreraView
         {
-            get { return FicIContainer.Resolve<FicVmCatEdificiosView>(); }
+            get { return FicIContainer.Resolve<FicVmAlumnoCarreraView>(); }
         }
 
-        public FicVmExportarWebApi FicVmExportarWebApi
+       /* public FicVmExportarWebApi FicVmExportarWebApi
         {
             get { return FicIContainer.Resolve<FicVmExportarWebApi>(); }
         }
-
-        public FicVmImportarWebApi FicVmImportarWebApi
+        */
+        public FicVmCatEdificiosImportarExportar FicVmCatEdificiosImportarExportar
         {
-            get { return FicIContainer.Resolve<FicVmImportarWebApi>(); }
+            get { return FicIContainer.Resolve<FicVmCatEdificiosImportarExportar>(); }
         }
         
     }

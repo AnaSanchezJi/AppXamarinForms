@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using AppXamarinForms.Views.cat_generales;
+using AppXamarinForms.Views.AlumnoCarrera;
+
 
 namespace AppXamarinForms.Views.Navegacion
 {
@@ -31,14 +32,14 @@ namespace AppXamarinForms.Views.Navegacion
                 switch (FicPagina)
                 {
                     case "FicViCatEdificiosList":
-                        FicItemMenu.TargetType = typeof(FicViCatEdificiosList);
+                        FicItemMenu.TargetType = typeof(FicViAlumnoCarreraList);
                         break;
                          case "FicViImportarWebApi":
-                             FicItemMenu.TargetType = typeof(FicViImportarWebApi);
+                             FicItemMenu.TargetType = typeof(ViCatEdificiosImportarExportar);
                              break;
-                         case "FicViExportarWebApi":
+                         /*case "FicViExportarWebApi":
                              FicItemMenu.TargetType = typeof(FicViExportarWebApi);
-                             break;
+                             break;*/
                          default:
                              break;                            
                 }

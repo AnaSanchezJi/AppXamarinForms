@@ -2,11 +2,11 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:syncfusion="clr-namespace:Syncfusion.SfDataGrid.XForms;assembly=Syncfusion.SfDataGrid.XForms"
-             x:Class="AppXamarinForms.Views.cat_generales.FicViCatEdificiosList">
+             x:Class="AppXamarinForms.Views.AlumnoCarrera.FicViAlumnoCarreraList">
     <ContentPage.ToolbarItems>
         <ToolbarItem 
-            Name="Nuevo Edificio"
-            Command="{Binding FicMetAddEdificioICommand}">
+            Name="Nuevo"
+            Command="{Binding FicMetAddAlumnoICommand}">
             <ToolbarItem.Icon>
                 <OnPlatform x:TypeArguments="FileImageSource">
                     <On Platform="UWP" Value="Assets/plus.png" />
@@ -14,8 +14,8 @@
             </ToolbarItem.Icon>
         </ToolbarItem>
         <ToolbarItem
-            Name="Editar Edificio"
-            Command="{Binding FicMetUpdateEdificioICommand}">
+            Name="Editar"
+            Command="{Binding FicMetUpdateAlumnoICommand}">
             <ToolbarItem.Icon>
                 <OnPlatform x:TypeArguments="FileImageSource">
                     <On Platform="UWP" Value="Assets/update.png" />
@@ -23,8 +23,8 @@
             </ToolbarItem.Icon>
         </ToolbarItem>
         <ToolbarItem
-            Name="Detalle Edificio"
-            Command="{Binding FicMetViewEdificioICommand}">
+            Name="Detalle"
+            Command="{Binding FicMetViewAlumnoICommand}">
             <ToolbarItem.Icon>
                 <OnPlatform x:TypeArguments="FileImageSource">
                     <On Platform="UWP" Value="Assets/detalle.png" />
@@ -32,19 +32,20 @@
             </ToolbarItem.Icon>
         </ToolbarItem>
         <ToolbarItem
-            Name="Borrar Edificio"
-            Command="{Binding FicMetRemoveEdificioICommand}">
+            Name="Borrar"
+            Command="{Binding FicMetRemoveAlumnoICommand}">
             <ToolbarItem.Icon>
                 <OnPlatform x:TypeArguments="FileImageSource">
                     <On Platform="UWP" Value="Assets/delete.png" />
                 </OnPlatform>
             </ToolbarItem.Icon>
         </ToolbarItem>
+        
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
         
-        <StackLayout Padding="10" BackgroundColor="LavenderBlush">
+        <StackLayout Padding="10">
             <SearchBar
                 HorizontalOptions="FillAndExpand"
                 Placeholder="Buscar..."                
@@ -58,15 +59,14 @@
                 ColumnSizer="Star"
                 AutoGenerateColumns="False"
                 AllowSorting="False"  
-                ItemsSource="{Binding FicSfDataGrid_ItemSource_CatEdificios}"
-                SelectedItem="{Binding FicSfDataGrid_SelectItem_CatEdificios}"
+                ItemsSource="{Binding FicSfDataGrid_ItemSource_Alumnos}"
+                SelectedItem="{Binding FicSfDataGrid_SelectItem_Alumnos}"
                 SelectionMode="Single">
                 <syncfusion:SfDataGrid.Columns x:TypeArguments="syncfusion:Columns">
-                    <syncfusion:GridTextColumn HeaderFontAttribute="Bold" HeaderText="Id" MappingName="IdEdificio"/>
-                    <syncfusion:GridTextColumn HeaderFontAttribute="Bold" HeaderText="Alias" MappingName="Alias"/>
-                    <syncfusion:GridTextColumn HeaderFontAttribute="Bold" HeaderText="Decripcion" MappingName="DesEdificio"/>
-                    <syncfusion:GridTextColumn HeaderFontAttribute="Bold" HeaderText="Prioridad" MappingName="Prioridad"/>
-                    <syncfusion:GridTextColumn HeaderFontAttribute="Bold" HeaderText="Clave" MappingName="Clave"/>
+                    <syncfusion:GridTextColumn HeaderFontAttribute="Bold" HeaderText="Id Carrera" MappingName="IdCarrera"/>
+                    <syncfusion:GridTextColumn HeaderFontAttribute="Bold" HeaderText="Id Alumno" MappingName="IdAlumno"/>
+                    <syncfusion:GridTextColumn HeaderFontAttribute="Bold" HeaderText="Id Reticula" MappingName="IdReticula"/>
+                    <syncfusion:GridTextColumn HeaderFontAttribute="Bold" HeaderText="Id Especicialidad" MappingName="IdEspecialidad"/>
                 </syncfusion:SfDataGrid.Columns>
             </syncfusion:SfDataGrid>
         </StackLayout>

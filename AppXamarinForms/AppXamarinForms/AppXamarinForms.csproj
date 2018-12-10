@@ -17,8 +17,17 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Views\cat_generales\FicViCatEdificiosList.xaml.cs">
-      <DependentUpon>FicViCatEdificiosList.xaml</DependentUpon>
+    <Compile Update="Views\AlumnoCarrera\FicViAlumnoCarreraList.xaml.cs">
+      <DependentUpon>FicViAlumnoCarreraList.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\AlumnoCarrera\FicViAlumnoCarreraView.xaml.cs">
+      <DependentUpon>FicViAlumnoCarreraView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\AlumnoCarrera\FicViAlumnoCarreraUpdate.xaml.cs">
+      <DependentUpon>FicViAlumnoCarreraUpdate.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\AlumnoCarrera\FicViAlumnoCarreraAdd.xaml.cs">
+      <DependentUpon>FicViAlumnoCarreraAdd.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\Navegacion\FicMasterPageMenuItem.cs">
       <SubType>Code</SubType>
@@ -26,22 +35,19 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Views\cat_generales\FicViCatEdificiosAdd.xaml">
+    <EmbeddedResource Update="Views\AlumnoCarrera\FicViAlumnoCarreraAdd.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\cat_generales\FicViCatEdificiosList.xaml">
+    <EmbeddedResource Update="Views\AlumnoCarrera\FicViAlumnoCarreraList.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\cat_generales\FicViCatEdificiosUpdate.xaml">
+    <EmbeddedResource Update="Views\AlumnoCarrera\FicViAlumnoCarreraUpdate.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\cat_generales\FicViCatEdificiosView.xaml">
+    <EmbeddedResource Update="Views\AlumnoCarrera\FicViAlumnoCarreraView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\cat_generales\FicViExportarWebApi.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Views\cat_generales\FicViImportarWebApi.xaml">
+    <EmbeddedResource Update="Views\AlumnoCarrera\ViCatEdificiosImportarExportar .xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Navegacion\FicMasterPage.xaml">

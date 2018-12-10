@@ -1,0 +1,179 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppXamarinForms.Views.AlumnoCarrera.FicViAlumnoCarreraView">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem 
+            Name="Regresar"
+            Command="{Binding FicMetRegesarAlumnoListICommand}">
+            <ToolbarItem.Icon>
+                <OnPlatform x:TypeArguments="FileImageSource">
+                    <On Platform="UWP" Value="Assets/back.png" />
+                </OnPlatform>
+            </ToolbarItem.Icon>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+        <ScrollView>
+        <StackLayout>
+            <StackLayout Padding="10" >
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Detalles Alumno-Carrera " FontAttributes="Bold" />
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="IdAlumno: " FontAttributes="Bold" FontSize="Micro"/>
+                        <Label Text="{Binding LabelIdAlumno}" FontSize="Micro" HorizontalOptions="FillAndExpand"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="IdCarrera: " FontAttributes="Bold" FontSize="Micro"/>
+                        <Label Text="{Binding LabelIdCarrera}" FontSize="Micro" HorizontalOptions="FillAndExpand" />
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="IdReticula: " FontAttributes="Bold" FontSize="Micro"/>
+                        <Label Text="{Binding LabelIdReticula}" FontSize="Micro" HorizontalOptions="FillAndExpand"/>
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="IdEspecialidad: " FontAttributes="Bold" FontSize="Micro"/>
+                        <Label Text="{Binding LabelIdEspecialidad}" FontSize="Micro" HorizontalOptions="FillAndExpand"/>
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="FechaIngreso: " FontAttributes="Bold" FontSize="Micro"/>
+                        <Label Text="{Binding LabelFechaIngreso}" FontSize="Micro" HorizontalOptions="FillAndExpand"/>
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="FechaEgreso : " FontAttributes="Bold" FontSize="Micro"/>
+                        <Label Text="{Binding LabelFechaEgreso}" FontSize="Micro" HorizontalOptions="FillAndExpand"/>
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="FechaTitulacion : " FontAttributes="Bold" FontSize="Micro"/>
+                        <Label Text="{Binding LabelFechaTitulacion}" FontSize="Micro"  HorizontalOptions="FillAndExpand"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="FechaUltModSII : " FontAttributes="Bold" FontSize="Micro"/>
+                        <Label Text="{Binding LabelFechaUltModSII}" FontSize="Micro"  HorizontalOptions="FillAndExpand"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="PromedioActual : " FontAttributes="Bold" FontSize="Micro"/>
+                        <Label Text="{Binding LabelPromedioActual}" FontSize="Micro" HorizontalOptions="FillAndExpand"/>
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="PromedioPeriodoAnt: " FontAttributes="Bold" FontSize="Micro"/>
+                        <Label Text="{Binding LabelPromedioPeriodoAnt}" FontSize="Micro" HorizontalOptions="FillAndExpand"/>
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="PromedioFinal:  " FontAttributes="Bold" FontSize="Micro"/>
+                        <Label Text="{Binding LabelPromedioFinal}" FontSize="Micro" HorizontalOptions="FillAndExpand"/>
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="CreditosAprobados: " FontAttributes="Bold" FontSize="Micro"/>
+                        <Label Text="{Binding LabelCreditosAprovados}" FontSize="Micro" HorizontalOptions="FillAndExpand"/>
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="CreditosCursados " FontAttributes="Bold" FontSize="Micro"/>
+                        <Label Text="{Binding LabelCreditosCursados}" FontSize="Micro" HorizontalOptions="FillAndExpand" />
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="TotalPuntosVigentes: " FontAttributes="Bold" FontSize="Micro"/>
+                        <Label Text="{Binding LabelTotalPuntosVigentes}" FontSize="Micro" HorizontalOptions="FillAndExpand"/>
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="TotalPuntosGenerados : " FontAttributes="Bold" FontSize="Micro"/>
+                        <Label Text="{Binding LabelTotalPuntosGenerados }" FontSize="Micro" HorizontalOptions="FillAndExpand"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="SemestreActual : " FontAttributes="Bold" FontSize="Micro"/>
+                        <Label Text="{Binding LabelSemestreActual }" FontSize="Micro" HorizontalOptions="FillAndExpand"/>
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="IdPeriodoIngreso : " FontAttributes="Bold" FontSize="Micro"/>
+                        <Label Text="{Binding LabelIdPeriodoIngreso }" FontSize="Micro" HorizontalOptions="FillAndExpand"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="IdPeriodoUltimo : " FontAttributes="Bold" FontSize="Micro"/>
+                        <Label Text="{Binding LabelIdPeriodoUltimo }" FontSize="Micro" HorizontalOptions="FillAndExpand" />
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="IdPeriodoTitulacion : " FontAttributes="Bold" FontSize="Micro"/>
+                        <Label Text="{Binding LabelIdPeriodoTitulacion }" FontSize="Micro" HorizontalOptions="FillAndExpand"/>
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="IdTipoGenPlanEstudio : " FontAttributes="Bold" FontSize="Micro"/>
+                        <Label Text="{Binding LabelIdTipoGenPlanEstudio }" FontSize="Micro" HorizontalOptions="FillAndExpand"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="IdGenPlanEstudio : " FontAttributes="Bold" FontSize="Micro"/>
+                        <Label Text="{Binding LabelIdGenPlanEstudio }" FontSize="Micro" HorizontalOptions="FillAndExpand" />
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="IdTipoGenOpcionTitulacion : " FontAttributes="Bold" FontSize="Micro"/>
+                        <Label Text="{Binding LabelIdTipoGenOpcionTitulacion }" FontSize="Micro" HorizontalOptions="FillAndExpand"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="IdGenOpcionTitulacion  : " FontAttributes="Bold" FontSize="Micro"/>
+                        <Label Text="{Binding LabelIdGenOpcionTitulacion }" FontSize="Micro" HorizontalOptions="FillAndExpand"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="IdTipoGenNivelEscolar : " FontAttributes="Bold" FontSize="Micro"/>
+                    <Label Text="{Binding LabelIdTipoGenNivelEscolar }" FontSize="Micro" HorizontalOptions="FillAndExpand"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="IdGenNivelEscolar  : " FontAttributes="Bold" FontSize="Micro"/>
+                    <Label Text="{Binding LabelIdGenNivelEscolar  }" FontSize="Micro" HorizontalOptions="FillAndExpand" />
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="IdTipoGenIngreso  : " FontAttributes="Bold" FontSize="Micro"/>
+                    <Label Text="{Binding LabelIdTipoGenIngreso }" FontSize="Micro" HorizontalOptions="FillAndExpand"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="IdGenIngreso  : " FontAttributes="Bold" FontSize="Micro"/>
+                    <Label Text="{Binding LabelIdGenIngreso }" FontSize="Micro" HorizontalOptions="FillAndExpand"/>
+                </StackLayout>
+                
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Fecha Reg: " FontAttributes="Bold" FontSize="Micro"/>
+                    <Label Text="{Binding LabelFechaReg}" FontSize="Micro"/>
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Fecha Mod: " FontAttributes="Bold" FontSize="Micro"/>
+                    <Label Text="{Binding LabelFechaUltMod}" FontSize="Micro"/>
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Usuario Reg: " FontAttributes="Bold" FontSize="Micro"/>
+                    <Label Text="{Binding LabelUsuarioReg}" FontSize="Micro"/>
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Usuario Mod: " FontAttributes="Bold" FontSize="Micro"/>
+                    <Label Text="{Binding LabelUsuarioMod}" FontSize="Micro"/>
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Activo: " FontAttributes="Bold" FontSize="Micro"/>
+                    <Label Text="{Binding LabelActivo}" FontSize="Micro"/>
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Borrado: " FontAttributes="Bold" FontSize="Micro"/>
+                    <Label Text="{Binding LabelBorrado}" FontSize="Micro"/>
+                </StackLayout>
+
+            </StackLayout>
+        </StackLayout>
+            </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

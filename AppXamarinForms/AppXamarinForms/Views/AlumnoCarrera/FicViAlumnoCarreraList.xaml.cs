@@ -8,29 +8,28 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using AppXamarinForms.Data;
 using AppXamarinForms.Interface.SQLite;
-using AppXamarinForms.ViewModels.CatGenerales;
+using AppXamarinForms.ViewModels.AlumnoCarrera;
 
-namespace AppXamarinForms.Views.cat_generales
+namespace AppXamarinForms.Views.AlumnoCarrera
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class FicViCatEdificiosList : ContentPage
+	public partial class FicViAlumnoCarreraList : ContentPage
 	{
         
-		public FicViCatEdificiosList ()
+		public FicViAlumnoCarreraList()
 		{
             InitializeComponent();
-            BindingContext = App.FicVmLocator.FicVmCatEdificiosList;                   
+            BindingContext = App.FicVmLocator.FicVmAlumnoCarreraList;                   
         }
 
-        public FicViCatEdificiosList(object FicNavegatioContext) {
+        public FicViAlumnoCarreraList(object FicNavegatioContext) {
             InitializeComponent();
-            BindingContext = App.FicVmLocator.FicVmCatEdificiosList;
+            BindingContext = App.FicVmLocator.FicVmAlumnoCarreraList;
         }
 
         protected async override void OnAppearing()
-
         {
-            var FicViewModel = BindingContext as FicVmCatEdificiosList;
+            var FicViewModel = BindingContext as FicVmAlumnoCarreraList;
             if (FicViewModel != null)
             {
                 FicViewModel.OnAppearing();

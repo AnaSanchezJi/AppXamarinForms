@@ -1,33 +1,38 @@
-﻿using AppXamarinForms.Interface.CatGenerales;
-using AppXamarinForms.ViewModels.Base;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using Xamarin.Forms;
+using System.Linq;
+using AppXamarinForms.Interface.AlumnoCarrera;
+using AppXamarinForms.ViewModels.Base;
 
-namespace AppXamarinForms.ViewModels.CatGenerales
+namespace AppXamarinForms.ViewModels.AlumnoCarrera
 {
-    public class FicVmImpExpWebApi
+    public class FicVmCatEdificiosImportarExportar
     {
         #region VARIABLES
         //Interfaces
-        private IFicSrvImpExpWebApi IFicImportarExportar;
+        private IFicSrvCatEdificiosImportarExportar IFicSrvCatEdificiosImportarExportar;
 
         //Comandos
         private ICommand _ImportarCommand, _ExportarCommand;
 
         #endregion
 
-        public FicVmImpExpWebApi(IFicSrvImpExpWebApi IFicImportarExportar)
+        public FicVmCatEdificiosImportarExportar(IFicSrvCatEdificiosImportarExportar IFicSrvCatEdificiosImportarExportar)
         {
-            this.IFicImportarExportar = IFicImportarExportar;
+            this.IFicSrvCatEdificiosImportarExportar = IFicSrvCatEdificiosImportarExportar;
         }
 
         public async void OnAppearing()
         {
 
         }
+
         #region Commandos
 
         public ICommand ImportCommand
@@ -39,7 +44,7 @@ namespace AppXamarinForms.ViewModels.CatGenerales
         {
             try
             {
-                var res = await IFicImportarExportar.FicImportEdificios();
+                var res = await IFicSrvCatEdificiosImportarExportar.Importar_eva_cat_edificios();
 
                 if (res == "OK")
                 {
@@ -66,7 +71,9 @@ namespace AppXamarinForms.ViewModels.CatGenerales
         {
             try
             {
-                var res = await IFicImportarExportar.FicExportEdificios();
+                string res = await IFicSrvCatEdificiosImportarExportar.Exportar_eva_cat_edificios();
+
+                System.Diagnostics.Debug.WriteLine("res\n" + res);
 
                 if (res == "OK")
                 {

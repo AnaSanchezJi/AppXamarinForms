@@ -6,7 +6,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
-using AppXamarinForms.Views.cat_generales;
+using AppXamarinForms.Views.AlumnoCarrera;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -37,17 +37,17 @@ namespace AppXamarinForms.Views.Navegacion
                     new FicMasterPageMenuItem { Id = 0, Title = "Importacion Web Api",
                                                  //Icon ="ficAlmacen20x20.png",
                                                   FicPageName ="FicViImportarWebApi",
-                                                  TargetType = typeof(FicViImportarWebApi)
+                                                  TargetType = typeof(ViCatEdificiosImportarExportar )
                                                   },
-                    new FicMasterPageMenuItem { Id = 0, Title = "Exportar Web Api",
+                    /*new FicMasterPageMenuItem { Id = 0, Title = "Exportar Web Api",
                                                 //Icon ="ficAlmacen20x20.png",
                                                 FicPageName ="FicViExportarWebApi",
                                                 TargetType = typeof(FicViExportarWebApi)
-                                                },
+                                                },*/
                     new FicMasterPageMenuItem { Id = 0, Title = "Edificios",
                                                 //Icon ="ficAlmacen20x20.png",
                                                 FicPageName ="FicViCatEdificiosList",
-                                                TargetType = typeof(FicViCatEdificiosList)
+                                                TargetType = typeof(FicViAlumnoCarreraList)
                                                 }
                 });
             }

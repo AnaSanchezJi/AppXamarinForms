@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using AppXamarinForms.Interface.CatGenerales;
+using AppXamarinForms.Interface.AlumnoCarrera;
 using AppXamarinForms.Data;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
@@ -10,25 +10,24 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using AppXamarinForms.Models;
 
-
-namespace AppXamarinForms.Services.CatGenerales
+namespace AppXamarinForms.Services.AlumnoCarrera
 {
-    public class FicSrvCatEdificiosList : IFicSvrCatEdificiosList
+    public class FicSrvAlumnoCarreraList : IFicSvrAlumnoCarreraList
     {
         private readonly FicDBContext FicLoBDContext;
-        public FicSrvCatEdificiosList()
+        public FicSrvAlumnoCarreraList()
         {
             FicLoBDContext = new FicDBContext(DependencyService.Get<IFicConfigSQLite>().FicGetDataBasePath());
         }
 
-        public async Task<IEnumerable<eva_cat_edificios>>FicMetGetListEdificios()
+        public async Task<IEnumerable<eva_alumnos_carreras>> FicMetGetListAlumnos()
         {
-            return await (from ed in FicLoBDContext.eva_cat_edificios select ed).AsNoTracking().ToListAsync();
+            return await (from ed in FicLoBDContext.eva_alumnos_carreras select ed).AsNoTracking().ToListAsync();
         }
         
-        public async Task<string> Remove_eva_cat_edificios(eva_cat_edificios eva_cat_edificios)
+        public async Task<string> RemoveAlumnos(eva_alumnos_carreras eva_alumnos_carreras)
         {
-            FicLoBDContext.Remove(eva_cat_edificios);
+            FicLoBDContext.Remove(eva_alumnos_carreras);
             return await FicLoBDContext.SaveChangesAsync() > 0 ? "OK" : "ERROR AL ELIMINAR";
         }
     }

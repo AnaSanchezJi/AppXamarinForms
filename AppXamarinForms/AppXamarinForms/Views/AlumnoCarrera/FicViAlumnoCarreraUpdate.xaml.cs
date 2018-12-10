@@ -1,4 +1,4 @@
-﻿using AppXamarinForms.ViewModels.CatGenerales;
+﻿using AppXamarinForms.ViewModels.AlumnoCarrera;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,23 +8,23 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace AppXamarinForms.Views.cat_generales
+namespace AppXamarinForms.Views.AlumnoCarrera
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class FicViCatEdificiosView : ContentPage
+	public partial class FicViAlumnoCarreraUpdate : ContentPage
 	{
         private object FicCuerpoNavigationContext { get; set; }
 
-        public FicViCatEdificiosView(object FicNavigationContext)
-        {
-            InitializeComponent();
+		public FicViAlumnoCarreraUpdate(object FicNavigationContext)
+		{
+			InitializeComponent ();
             FicCuerpoNavigationContext = FicNavigationContext;
-            BindingContext = App.FicVmLocator.FicVmCatEdificiosView;
+            BindingContext = App.FicVmLocator.FicVmAlumnoCarreraUpdate;
         }
 
         protected async override void OnAppearing()
         {
-            var FicViewModel = BindingContext as FicVmCatEdificiosView;
+            var FicViewModel = BindingContext as FicVmAlumnoCarreraUpdate;
             if (FicViewModel != null)
             {
                 FicViewModel.FicNavigationContextC = FicCuerpoNavigationContext;
@@ -32,6 +32,6 @@ namespace AppXamarinForms.Views.cat_generales
                 FicViewModel.OnAppearing();
 
             }
-        }
+        }//SE EJECUTA CUANDO SE ABRE LA VIEW
     }
 }

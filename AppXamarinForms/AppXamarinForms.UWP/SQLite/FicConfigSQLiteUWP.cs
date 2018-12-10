@@ -16,6 +16,7 @@ namespace AppXamarinForms.UWP.SQLite
     {
         public string FicGetDataBasePath()
         {
+            
             return Path.Combine(ApplicationData.Current.LocalFolder.Path, FicAppSettings.FicDataBaseName);
         }
     }

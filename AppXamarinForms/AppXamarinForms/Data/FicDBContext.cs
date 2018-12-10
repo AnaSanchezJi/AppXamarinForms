@@ -44,46 +44,49 @@ namespace AppXamarinForms.Data
             }
         }//CONFIGURACION DE LA CONEXION
 
-        public DbSet<eva_cat_espacios> eva_cat_espacios { get; set; }
-        public DbSet<eva_cat_edificios> eva_cat_edificios { get; set; }
-        public DbSet<cat_estatus> cat_estatus { get; set; }
-        public DbSet<cat_tipos_estatus> cat_tipos_estatus { get; set; }
+        public DbSet<eva_alumnos_carreras> eva_alumnos_carreras { get; set; }
+        public DbSet<eva_cat_carreras> eva_cat_carreras { get; set; }
+        public DbSet<eva_cat_especialidades> eva_cat_especialidades { get; set; }
+        public DbSet<eva_cat_reticulas> eva_cat_reticulas { get; set; }
+        public DbSet<cat_generales> cat_generales { get; set; }
+        public DbSet<cat_periodos> cat_periodos { get; set; }
+        public DbSet<cat_tipos_generales> cat_tipos_generales { get; set; }
+        public DbSet<rh_cat_alumnos> rh_cat_alumnos { get; set; }
+        public DbSet<rh_cat_personas> rh_cat_personas { get; set; }
 
         protected async override void OnModelCreating(ModelBuilder modelBuilder)
         {
             try
             {
-                //Laves primarias
-                modelBuilder.Entity<eva_cat_edificios>()
-                    .HasKey(c => new { c.IdEdificio});
-                modelBuilder.Entity<eva_cat_espacios>()
-                        .HasKey(c => new {c.IdEspacio});
-
-                modelBuilder.Entity<cat_tipos_estatus>()
-                  .HasKey(es => new { es.IdTipoEstatus });
-
-                modelBuilder.Entity<cat_estatus>()
-                   .HasKey(es => new { es.IdEstatus });
-
-                //Laves foraneas
-
-                modelBuilder.Entity<eva_cat_espacios>()
-                .HasOne(s => s.cat_tipos_status).
-                WithMany().HasForeignKey(s => new { s.IdEstatus });
-
-                modelBuilder.Entity<eva_cat_espacios>()
-                .HasOne(s => s.cat_tipos_status).
-                WithMany().HasForeignKey(s => new { s.IdTipoEstatus });
+                //LLaves primarias
+                modelBuilder.Entity<eva_cat_carreras>().HasKey(ca => new { ca.IdCarrera });
+                modelBuilder.Entity<cat_generales>().HasKey(ge => new { ge.IdGeneral });
+                modelBuilder.Entity<cat_periodos>().HasKey(pe => new { pe.IdPeriodo });
+                modelBuilder.Entity<cat_tipos_generales>().HasKey(tg => new { tg.IdTipoGeneral });
+                modelBuilder.Entity<eva_alumnos_carreras>().HasKey(tg => new { tg.IdAlumno });
+                modelBuilder.Entity<eva_cat_especialidades>().HasKey(es => new { es.IdEspecialidad });
+                modelBuilder.Entity<eva_cat_reticulas>().HasKey(re => new { re.IdReticula });
+                modelBuilder.Entity<rh_cat_alumnos>().HasKey(re => new { re.IdAlumno });
+                modelBuilder.Entity<rh_cat_personas>().HasKey(cp => new { cp.IdPersona });
 
 
-                modelBuilder.Entity<eva_cat_espacios>()
-                .HasOne(s => s.eva_cat_edificios).
-                WithMany().HasForeignKey(s => new { s.IdEdificio });
-
-
-                modelBuilder.Entity<cat_estatus>()
-                .HasOne(s => s.cat_tipo_estatus).
-                WithMany().HasForeignKey(s => new { s.IdTipoEstatus });
+                //LLaves foraneas
+                //modelBuilder.Entity<eva_alumnos_carreras>().HasOne(s => s.rh_cat_alumnos).WithMany().HasForeignKey(s => s.IdAlumno);
+                //modelBuilder.Entity<eva_alumnos_carreras>().HasOne(s => s.carreras).WithMany().HasForeignKey(s => s.IdCarrera);
+                modelBuilder.Entity<eva_alumnos_carreras>().HasOne(s => s.eva_cat_reticulas).WithMany().HasForeignKey(s => s.IdReticula);
+                modelBuilder.Entity<eva_alumnos_carreras>().HasOne(s => s.eva_cat_especialidades).WithMany().HasForeignKey(s => s.IdEspecialidad);
+                modelBuilder.Entity<eva_alumnos_carreras>().HasOne(s => s.cat_periodosI).WithMany().HasForeignKey(s => s.IdPeriodoIngreso);
+                modelBuilder.Entity<eva_alumnos_carreras>().HasOne(s => s.cat_periodosU).WithMany().HasForeignKey(s => s.IdPeriodoUltimo);
+                modelBuilder.Entity<eva_alumnos_carreras>().HasOne(s => s.cat_periodosT).WithMany().HasForeignKey(s => s.IdPeriodoTitulacion);
+                modelBuilder.Entity<eva_alumnos_carreras>().HasOne(s => s.tipo_generalI).WithMany().HasForeignKey(s => s.IdTipoGenIngreso);
+                modelBuilder.Entity<eva_alumnos_carreras>().HasOne(s => s.generalI).WithMany().HasForeignKey(s => s.IdGenIngreso);
+                modelBuilder.Entity<eva_alumnos_carreras>().HasOne(s => s.tipo_generalNE).WithMany().HasForeignKey(s => s.IdTipoGenNivelEscolar);
+                modelBuilder.Entity<eva_alumnos_carreras>().HasOne(s => s.generalNE).WithMany().HasForeignKey(s => s.IdGenNivelEscolar);
+                modelBuilder.Entity<eva_alumnos_carreras>().HasOne(s => s.tipo_generalT).WithMany().HasForeignKey(s => s.IdTipoGenOpcionTitulacion);
+                modelBuilder.Entity<eva_alumnos_carreras>().HasOne(s => s.generalT).WithMany().HasForeignKey(s => s.IdGenOpcionTitulacion);
+                modelBuilder.Entity<eva_alumnos_carreras>().HasOne(s => s.tipo_generalPE).WithMany().HasForeignKey(s => s.IdTipoGenPlanEstudio);
+                modelBuilder.Entity<eva_alumnos_carreras>().HasOne(s => s.generalPE).WithMany().HasForeignKey(s => s.IdGenPlanEstudio);
+                
 
             }
             catch (Exception e)

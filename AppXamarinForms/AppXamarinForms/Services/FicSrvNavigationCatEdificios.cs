@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Text;
 using Xamarin.Forms;
 using AppXamarinForms.Interface.Navegacion;
-using AppXamarinForms.ViewModels.CatGenerales;
-using AppXamarinForms.Views.cat_generales;
+using AppXamarinForms.ViewModels.AlumnoCarrera;
+using AppXamarinForms.Views.AlumnoCarrera;
 
 namespace AppXamarinForms.Services
 {
@@ -13,16 +13,12 @@ namespace AppXamarinForms.Services
         private IDictionary<Type, Type> FicViewModelRouting = new Dictionary<Type, Type>()
         {
             //AQUI SE HACE UNA UNION ENTRE LA VM Y VI DE CADA VIEW DE LA APP
-            { typeof(FicVmCatEdificiosList),typeof(FicViCatEdificiosList) },
-            { typeof(FicVmCatEdificiosAdd),typeof(FicViCatEdificiosAdd) },
-            { typeof(FicVmCatEdificiosUpdate),typeof(FicViCatEdificiosUpdate) },
-            { typeof(FicVmCatEdificiosView),typeof(FicViCatEdificiosView) },
-            //{typeof(FicVmImportarWebApi), typeof(FicViImportarWebApi)},
-            //{typeof(FicVmExportarWebApi), typeof(FicViExportarWebApi)},
-            //{typeof(FicVmImpExpWebApi), typeof(FicViExportarWebApi) },
-            //{typeof(FicVmImpExpWebApi), typeof(FicViImportarWebApi) }
-
-
+            { typeof(FicVmAlumnoCarreraList),typeof(FicViAlumnoCarreraList) },
+            { typeof(FicVmAlumnoCarreraAdd),typeof(FicViAlumnoCarreraAdd) },
+            { typeof(FicVmAlumnoCarreraUpdate),typeof(FicViAlumnoCarreraUpdate) },
+            { typeof(FicVmAlumnoCarreraView),typeof(FicViAlumnoCarreraView) },
+           // {typeof(FicVmImportarWebApi), typeof(FicViImportarWebApi)},
+            //{typeof(FicVmExportarWebApi), typeof(FicViExportarWebApi)}
 
         };
 
