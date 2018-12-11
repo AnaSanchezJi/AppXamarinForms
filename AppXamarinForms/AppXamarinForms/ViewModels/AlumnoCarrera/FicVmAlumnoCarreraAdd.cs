@@ -173,7 +173,7 @@ namespace AppXamarinForms.ViewModels.AlumnoCarrera
                 }
             }
         }
-        public Int16 ALIndex
+        public Int16 AlIndex
         {
             get { return _AlIndex; }
             set

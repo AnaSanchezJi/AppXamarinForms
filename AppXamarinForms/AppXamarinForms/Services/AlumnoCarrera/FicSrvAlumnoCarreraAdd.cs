@@ -2,7 +2,6 @@
 using AppXamarinForms.Interface.AlumnoCarrera;
 using AppXamarinForms.Interface.SQLite;
 using AppXamarinForms.Models;
-using AppXamarinForms.Data;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;

@@ -9,6 +9,7 @@ using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
 using AppXamarinForms.Models;
+using System.Threading.Tasks;
 
 namespace AppXamarinForms.ViewModels.AlumnoCarrera
 {
@@ -16,6 +17,53 @@ namespace AppXamarinForms.ViewModels.AlumnoCarrera
     {
         private IFicSrvNavegationCatEdificiosList IFicSrvNavigationEdificios;
         private IFicSrvAlumnoCarreraUpdate IFicSrvAlumnoCarreraUpdate;
+
+        public List<string> _ListCarrera;
+        public string _Carrera;
+        public Int16 _CaIndex;
+        //RETICULA
+        public List<string> _ListReticula;
+        public string _Reticula;
+        public Int16 _ReIndex;
+        //ESPECIALIDAD  
+        public List<string> _ListEspecialidad;
+        public string _Especialidad;
+        public Int16 _EsIndex;
+
+        //PERIODOS  
+        public List<string> _ListPeriodo1;
+        public string _Periodo1;
+        public Int16 _P1Index;
+
+        //ESPECIALIDAD  
+        public List<string> _ListPeriodo2;
+        public string _Periodo2;
+
+        //ESPECIALIDAD  
+        public List<string> _ListPeriodo3;
+        public string _Periodo3;
+     
+        //ESPECIALIDAD  
+        public List<string> _ListGen1;
+        public string _Gen1;
+        public Int16 _G1Index;
+
+        public List<string> _ListGen2;
+        public string _Gen2;
+        public Int16 _G2Index;
+
+        public List<string> _ListGen3;
+        public string _Gen3;
+        public Int16 _G3Index;
+
+        public List<string> _ListGen4;
+        public string _Gen4;
+        public Int16 _G4Index;
+
+        public List<string> _ListAlumno;
+        public string _Alumno;
+        public Int16 _AlIndex;
+
 
         private short _LabelIdCarrera;
         private int _LabelIdAlumno;
@@ -61,8 +109,33 @@ namespace AppXamarinForms.ViewModels.AlumnoCarrera
         {
             this.IFicSrvNavigationEdificios = IFicSrvNavigationEdificios;
             this.IFicSrvAlumnoCarreraUpdate = IFicSrvAlumnoCarreraUpdate;
+             _ListCarrera = GetListCarrera().Result;
+           /* _ListReticula = GetListReticula().Result;
+            _ListEspecialidad = GetListEspecialidad().Result;
+            _ListPeriodo1 = GetListPeriodo1().Result;
+            _ListPeriodo2 = GetListPeriodo2().Result;
+            _ListPeriodo3 = GetListPeriodo3().Result;
+            _ListGen1 = GetListGen1().Result;
+            _ListGen2 = GetListGen2().Result;
+            _ListGen3 = GetListGen3().Result;
+            _ListGen4 = GetListGen4().Result;
+            _ListAlumno = GetListAlumno().Result;*/
         }
 
+        public async Task<List<string>> GetListCarrera()
+        {
+            var listaCarrera = await IFicSrvAlumnoCarreraUpdate.FicMetGetListCarrera();
+            List<string> aux = new List<string>();
+            if (listaCarrera != null)
+            {
+                foreach (eva_cat_carreras carreras in listaCarrera)
+                {
+                    aux.Add(carreras.Alias);
+                }
+                return aux;
+            }
+            return null;
+        }
         public short LabelIdCarrera
         {
             get { return _LabelIdCarrera; }
@@ -575,7 +648,7 @@ namespace AppXamarinForms.ViewModels.AlumnoCarrera
             {
                 var RespuestaInsert = await IFicSrvAlumnoCarreraUpdate.UpdateAlumno(new eva_alumnos_carreras()
                 {
-                IdCarrera = LabelIdCarrera,
+                IdCarrera = source_eva_alumnos_carreras.IdCarrera,
                 IdAlumno = source_eva_alumnos_carreras.IdAlumno,
                 IdReticula = LabelIdEspecialidad,
                 IdEspecialidad = LabelIdEspecialidad,

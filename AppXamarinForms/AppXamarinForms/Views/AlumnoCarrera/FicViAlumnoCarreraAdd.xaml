@@ -24,7 +24,8 @@
                     </StackLayout>
                     <StackLayout Orientation="Horizontal">
                         <Label Text="IdAlumno: " FontAttributes="Bold" FontSize="Micro"/>
-                        <Picker SelectedItem="{Binding Alumno}" SelectedIndex="{Binding AlIndex}" HorizontalOptions="StartAndExpand" ItemsSource="{Binding ListAlumno}"></Picker>
+                        <Entry Text="{Binding LabelIdAlumno}" FontSize="Micro" HorizontalOptions="FillAndExpand"/>
+                       <!-- <Picker SelectedItem="{Binding Alumno}" SelectedIndex="{Binding AlIndex}" HorizontalOptions="StartAndExpand" ItemsSource="{Binding ListAlumno}"></Picker>-->
                     </StackLayout>
                     <StackLayout Orientation="Horizontal">
                         <Label Text="IdCarrera: " FontAttributes="Bold" FontSize="Micro"/>
@@ -71,7 +72,7 @@
 
                     <StackLayout Orientation="Horizontal">
                         <Label Text="CreditosAprobados: " FontAttributes="Bold" FontSize="Micro"/>
-                        <Entry Text="{Binding LabelCreditosAprovados}" FontSize="Micro" HorizontalOptions="FillAndExpand"/>
+                        <Entry Text="{Binding LabelCreditosAprobados}" FontSize="Micro" HorizontalOptions="FillAndExpand"/>
                     </StackLayout>
                     <StackLayout Orientation="Horizontal">
                         <Label Text="CreditosCursados " FontAttributes="Bold" FontSize="Micro"/>

@@ -74,7 +74,7 @@
 
                     <StackLayout Orientation="Horizontal">
                         <Label Text="CreditosAprobados: " FontAttributes="Bold" FontSize="Micro"/>
-                        <Entry Text="{Binding LabelCreditosAprovados}" FontSize="Micro" HorizontalOptions="FillAndExpand"/>
+                        <Entry Text="{Binding LabelCreditosAprobados}" FontSize="Micro" HorizontalOptions="FillAndExpand"/>
                     </StackLayout>
 
                     <StackLayout Orientation="Horizontal">
