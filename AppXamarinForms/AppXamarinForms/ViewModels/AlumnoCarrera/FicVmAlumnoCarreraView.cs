@@ -1,11 +1,15 @@
 ﻿using AppXamarinForms.Interface.Navegacion;
 using AppXamarinForms.ViewModels.Base;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using Xamarin.Forms;
+
 using AppXamarinForms.Models;
+using AppXamarinForms.Data;
+using AppXamarinForms.Interface.AlumnoCarrera;
 
 namespace AppXamarinForms.ViewModels.AlumnoCarrera
 {
@@ -13,11 +17,12 @@ namespace AppXamarinForms.ViewModels.AlumnoCarrera
     
     {
         private IFicSrvNavegationCatEdificiosList IFicSrvNavegationCatEdificiosList;
+        private IFicSvrAlumnoCarreraList ficSvrAlumnoCarreraList;
 
-        private short _LabelIdCarrera;
-        private int _LabelIdAlumno;
-        private int _LabelIdReticula;
-        private short _LabelIdEspecialidad;
+        private string _LabelIdCarrera;
+        private string _LabelIdAlumno;
+        private string _LabelIdReticula;
+        private string _LabelIdEspecialidad;
         private DateTime _LabelFechaIngreso;
         private DateTime _LabelFechaEgreso;
         private DateTime _LabelFechaTitulacion;
@@ -30,18 +35,18 @@ namespace AppXamarinForms.ViewModels.AlumnoCarrera
         private double _LabelTotalPuntosVigentes;
         private double _LabelTotalPuntosGenerados;
         private short _LabelSemestreActual;
-        private short _LabelIdPeriodoIngreso;
-        private short _LabelIdPeriodoUltimo;
-        private short _LabelIdPeriodoTitulacion;
+        private string _LabelIdPeriodoIngreso;
+        private string _LabelIdPeriodoUltimo;
+        private string _LabelIdPeriodoTitulacion;
 
         private short _LabelIdTipoGenPlanEstudio;
-        private short _LabelIdGenPlanEstudio;
+        private string _LabelIdGenPlanEstudio;
         private short _LabelIdTipoGenOpcionTitulacion;
-        private short _LabelIdGenOpcionTitulacion;
+        private string _LabelIdGenOpcionTitulacion;
         private short _LabelIdTipoGenNivelEscolar;
-        private short _LabelIdGenNivelEscolar;
+        private string _LabelIdGenNivelEscolar;
         private short _LabelIdTipoGenIngreso;
-        private short _LabelIdGenIngreso;
+        private string _LabelIdGenIngreso;
 
         private string _LabelActivo;
         private string _LabelBorrado;
@@ -55,11 +60,13 @@ namespace AppXamarinForms.ViewModels.AlumnoCarrera
         public object FicNavigationContextC { get; set; }
 
 
-        public FicVmAlumnoCarreraView(IFicSrvNavegationCatEdificiosList IFicSrvNavegationCatEdificiosList)
+        public FicVmAlumnoCarreraView(IFicSrvNavegationCatEdificiosList IFicSrvNavegationCatEdificiosList, 
+            IFicSvrAlumnoCarreraList ficSvrAlumnoCarreraList)
         {
+            this.ficSvrAlumnoCarreraList = ficSvrAlumnoCarreraList;
             this.IFicSrvNavegationCatEdificiosList = IFicSrvNavegationCatEdificiosList;
         }
-        public short LabelIdCarrera
+        public string LabelIdCarrera
         {
             get { return _LabelIdCarrera; }
             set
@@ -72,7 +79,7 @@ namespace AppXamarinForms.ViewModels.AlumnoCarrera
             }
         }
 
-        public int LabelIdAlumno
+        public string LabelIdAlumno
         {
             get { return _LabelIdAlumno; }
             set
@@ -86,7 +93,7 @@ namespace AppXamarinForms.ViewModels.AlumnoCarrera
         }
 
 
-        public int LabelIdReticula
+        public string LabelIdReticula
         {
             get { return _LabelIdReticula; }
             set
@@ -98,7 +105,7 @@ namespace AppXamarinForms.ViewModels.AlumnoCarrera
                 }
             }
         }
-        public short LabelIdEspecialidad
+        public string LabelIdEspecialidad
         {
             get { return _LabelIdEspecialidad; }
             set
@@ -254,7 +261,7 @@ namespace AppXamarinForms.ViewModels.AlumnoCarrera
                 }
             }
         }
-        public short LabelIdPeriodoIngreso
+        public string LabelIdPeriodoIngreso
         {
             get { return _LabelIdPeriodoIngreso; }
             set
@@ -266,7 +273,7 @@ namespace AppXamarinForms.ViewModels.AlumnoCarrera
                 }
             }
         }
-        public short LabelIdPeriodoUltimo
+        public string LabelIdPeriodoUltimo
         {
             get { return _LabelIdPeriodoUltimo; }
             set
@@ -278,7 +285,7 @@ namespace AppXamarinForms.ViewModels.AlumnoCarrera
                 }
             }
         }
-        public short LabelIdPeriodoTitulacion
+        public string LabelIdPeriodoTitulacion
         {
             get { return _LabelIdPeriodoTitulacion; }
             set
@@ -302,7 +309,7 @@ namespace AppXamarinForms.ViewModels.AlumnoCarrera
                 }
             }
         }
-        public short LabelIdGenPlanEstudio
+        public string LabelIdGenPlanEstudio
         {
             get { return _LabelIdGenPlanEstudio; }
             set
@@ -326,7 +333,7 @@ namespace AppXamarinForms.ViewModels.AlumnoCarrera
                 }
             }
         }
-        public short LabelIdGenOpcionTitulacion
+        public string LabelIdGenOpcionTitulacion
         {
             get { return _LabelIdGenOpcionTitulacion; }
             set
@@ -350,7 +357,7 @@ namespace AppXamarinForms.ViewModels.AlumnoCarrera
                 }
             }
         }
-        public short LabelIdGenNivelEscolar
+        public string LabelIdGenNivelEscolar
         {
             get { return _LabelIdGenNivelEscolar; }
             set
@@ -374,7 +381,7 @@ namespace AppXamarinForms.ViewModels.AlumnoCarrera
                 }
             }
         }
-        public short LabelIdGenIngreso
+        public string LabelIdGenIngreso
         {
             get { return _LabelIdGenIngreso; }
             set
@@ -466,10 +473,23 @@ namespace AppXamarinForms.ViewModels.AlumnoCarrera
         public async void OnAppearing()
         {
             var source_eva_alumnos_carreras = FicNavigationContextC as eva_alumnos_carreras;
-            _LabelIdCarrera = source_eva_alumnos_carreras.IdCarrera;
-            _LabelIdAlumno = source_eva_alumnos_carreras.IdAlumno;
-            _LabelIdReticula = source_eva_alumnos_carreras.IdEspecialidad;
-            _LabelIdEspecialidad = source_eva_alumnos_carreras.IdEspecialidad;
+            rh_cat_personas cat_aux = ficSvrAlumnoCarreraList.FicMetGetListAlumno(source_eva_alumnos_carreras.IdAlumno).Result;
+            eva_cat_carreras carreras = ficSvrAlumnoCarreraList.FicMetGetListCarrera(source_eva_alumnos_carreras.IdCarrera).Result;
+            eva_cat_reticulas reti = ficSvrAlumnoCarreraList.FicMetGetListReticula(source_eva_alumnos_carreras.IdReticula).Result;
+            eva_cat_especialidades espe = ficSvrAlumnoCarreraList.FicMetGetListEspecialidad(source_eva_alumnos_carreras.IdEspecialidad).Result;
+            cat_generales ge1 = ficSvrAlumnoCarreraList.FicMetGetListGen1(source_eva_alumnos_carreras.IdGenPlanEstudio).Result;
+            cat_generales ge2 = ficSvrAlumnoCarreraList.FicMetGetListGen2(source_eva_alumnos_carreras.IdGenOpcionTitulacion).Result;
+            cat_generales ge3 = ficSvrAlumnoCarreraList.FicMetGetListGen1(source_eva_alumnos_carreras.IdGenNivelEscolar).Result;
+            cat_generales ge4 = ficSvrAlumnoCarreraList.FicMetGetListGen1(source_eva_alumnos_carreras.IdGenIngreso).Result;
+            cat_periodos pe1 = ficSvrAlumnoCarreraList.FicMetGetListPeriodo1(source_eva_alumnos_carreras.IdPeriodoIngreso).Result;
+            cat_periodos pe2 = ficSvrAlumnoCarreraList.FicMetGetListPeriodo2(source_eva_alumnos_carreras.IdPeriodoUltimo).Result;
+            cat_periodos pe3 = ficSvrAlumnoCarreraList.FicMetGetListPeriodo1(source_eva_alumnos_carreras.IdPeriodoTitulacion).Result;
+
+
+            _LabelIdCarrera = carreras.Alias;
+            _LabelIdAlumno = cat_aux.Nombre;
+            _LabelIdReticula = reti.DesReticula;
+            _LabelIdEspecialidad = espe.DesEspecialidad;
             _LabelFechaIngreso = source_eva_alumnos_carreras.FechaIngreso;
             _LabelFechaEgreso = source_eva_alumnos_carreras.FechaEgreso;
             _LabelFechaTitulacion = source_eva_alumnos_carreras.FechaTitulacion;
@@ -482,18 +502,18 @@ namespace AppXamarinForms.ViewModels.AlumnoCarrera
             _LabelTotalPuntosVigentes = source_eva_alumnos_carreras.TotalPuntosVigentes;
             _LabelTotalPuntosGenerados = source_eva_alumnos_carreras.TotalPuntosGenerados;
             _LabelSemestreActual = source_eva_alumnos_carreras.SemestreActual;
-            _LabelIdPeriodoIngreso = source_eva_alumnos_carreras.IdPeriodoIngreso;
-            _LabelIdPeriodoUltimo = source_eva_alumnos_carreras.IdPeriodoUltimo;
-            _LabelIdPeriodoTitulacion = source_eva_alumnos_carreras.IdPeriodoTitulacion;
+            _LabelIdPeriodoIngreso = pe1.DesPeriodo;
+            _LabelIdPeriodoUltimo = pe2.DesPeriodo;
+            _LabelIdPeriodoTitulacion = pe3.DesPeriodo;
 
             _LabelIdTipoGenPlanEstudio = source_eva_alumnos_carreras.IdTipoGenPlanEstudio;
-            _LabelIdGenPlanEstudio = source_eva_alumnos_carreras.IdGenPlanEstudio;
+            _LabelIdGenPlanEstudio = ge1.DesGeneral;
             _LabelIdTipoGenOpcionTitulacion = source_eva_alumnos_carreras.IdTipoGenOpcionTitulacion;
-            _LabelIdGenOpcionTitulacion = source_eva_alumnos_carreras.IdGenOpcionTitulacion;
+            _LabelIdGenOpcionTitulacion = ge2.DesGeneral;
             _LabelIdTipoGenNivelEscolar = source_eva_alumnos_carreras.IdTipoGenNivelEscolar;
-            _LabelIdGenNivelEscolar = source_eva_alumnos_carreras.IdTipoGenNivelEscolar;
+            _LabelIdGenNivelEscolar = ge3.DesGeneral;
             _LabelIdTipoGenIngreso = source_eva_alumnos_carreras.IdTipoGenIngreso;
-            _LabelIdGenIngreso = source_eva_alumnos_carreras.IdTipoGenIngreso;
+            _LabelIdGenIngreso = ge4.DesGeneral;
 
             _LabelActivo = source_eva_alumnos_carreras.Activo;
             _LabelBorrado = source_eva_alumnos_carreras.Borrado;

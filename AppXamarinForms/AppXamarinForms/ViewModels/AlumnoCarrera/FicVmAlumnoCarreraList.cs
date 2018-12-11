@@ -18,6 +18,7 @@ namespace AppXamarinForms.ViewModels.AlumnoCarrera
     {
         public ObservableCollection<eva_alumnos_carreras> _FicSfDataGrid_ItemSource_Alumnos;
         public eva_alumnos_carreras _FicSfDataGrid_SelectItem_Alumnos;
+        public ObservableCollection<rh_cat_personas> _FicSfDataGrid_ItemSource_Persona;
         private ICommand _FicMetAddAlumnoICommand;
         private ICommand _FicMetUpdateAlumnoICommand;
         private ICommand _FicMetRemoveAlumnoICommand;
@@ -43,6 +44,7 @@ namespace AppXamarinForms.ViewModels.AlumnoCarrera
            
 
             _FicSfDataGrid_ItemSource_Alumnos = new ObservableCollection<eva_alumnos_carreras>();
+            _FicSfDataGrid_ItemSource_Persona = new ObservableCollection<rh_cat_personas>();
         }
 
         public ObservableCollection<eva_alumnos_carreras> FicSfDataGrid_ItemSource_Alumnos
