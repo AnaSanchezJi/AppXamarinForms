@@ -32,5 +32,10 @@ namespace AppXamarinForms.Views.AlumnoCarrera
                 FicViewModel.OnAppearing();
             }
         }
+
+        private void Entry_Unfocused(object sender, FocusEventArgs e)
+        {
+
+        }
     }
 }

@@ -21,25 +21,71 @@ namespace AppXamarinForms.ViewModels.AlumnoCarrera
         private IFicSrvNavegationCatEdificiosList IFicSrvNavigationEdificiosList;
         private IFicSrvAlumnoCarreraAdd IFicSrvAlumnoCarreraAdd;
 
-        private short _LabelIdCarrera;
         private short _LabelIdAlumno;
-        private int _LabelIdReticula;
-        private short _LabelIdEspecialidad;
+        //CARRERA
+        public List<string> _ListCarrera;
+        public string _Carrera;
+        public Int16 _CaIndex;
+        //RETICULA
+        public List<string> _ListReticula;
+        public string _Reticula;
+        public Int16 _ReIndex;
+        //ESPECIALIDAD  
+        public List<string> _ListEspecialidad;
+        public string _Especialidad;
+        public Int16 _EsIndex;
+
+        //PERIODOS  
+        public List<string> _ListPeriodo1;
+        public string _Periodo1;
+        public Int16 _P1Index;
+
+        //ESPECIALIDAD  
+        public List<string> _ListPeriodo2;
+        public string _Periodo2;
+        public Int16 _P2Index;
+
+        //ESPECIALIDAD  
+        public List<string> _ListPeriodo3;
+        public string _Periodo3;
+        public Int16 _P3Index;
+
+
+        //ESPECIALIDAD  
+        public List<string> _ListGen1;
+        public string _Gen1;
+        public Int16 _G1Index;
+
+        public List<string> _ListGen2;
+        public string _Gen2;
+        public Int16 _G2Index;
+
+        public List<string> _ListGen3;
+        public string _Gen3;
+        public Int16 _G3Index;
+
+        public List<string> _ListGen4;
+        public string _Gen4;
+        public Int16 _G4Index;
+
+        public List<string> _ListAlumno;
+        public string _Alumno;
+        public Int16 _AlIndex;
+
         private DateTime _LabelFechaIngreso;
         private DateTime _LabelFechaEgreso;
         private DateTime _LabelFechaTitulacion;
         private DateTime _LabelFechaUltModSII;
+
         private float _LabelPromedioActual;
         private int _LabelPromedioPeriodoAnt;
         private float _LabelPromedioFinal;
+
         private float _LabelCreditosAprobados;
         private float _LabelCreditosCursados;
         private float _LabelTotalPuntosVigentes;
         private float _LabelTotalPuntosGenerados;
         private short _LabelSemestreActual;
-        private short _LabelIdPeriodoIngreso;
-        private short _LabelIdPeriodoUltimo;
-        private short _LabelIdPeriodoTitulacion;
 
         private short _LabelIdTipoGenPlanEstudio;
         private short _LabelIdGenPlanEstudio;
@@ -52,10 +98,7 @@ namespace AppXamarinForms.ViewModels.AlumnoCarrera
 
         private string _LabelActivo;
         private string _LabelBorrado;
-        private DateTime _LabelFechaReg;
-        private string _LabelUsuarioReg;
-        private DateTime _LabelFechaUltMod;
-        private string _LabelUsuarioMod;
+        
         
         private ICommand _FicMetRegesarAlumnosListICommand, _SaveCommand;
 
@@ -65,25 +108,19 @@ namespace AppXamarinForms.ViewModels.AlumnoCarrera
         {
             this.IFicSrvNavigationEdificiosList = ficSrvNavigationEdificiosList;
             this.IFicSrvAlumnoCarreraAdd = ficSrvAlumnoCarreraAdd;
-        }
-        
-        public short LabelIdCarrera
-        {
-            get
-            {
-                return _LabelIdCarrera;
-            }
-            set
-            {
-                if (value != null)
-                {
-                    _LabelIdCarrera = value;
-                    RaisePropertyChanged("LabelIdCarrera");
-                }
-            }
-        }
 
-        
+            _ListCarrera = GetListCarrera().Result;
+            _ListReticula = GetListReticula().Result;
+            _ListEspecialidad = GetListEspecialidad().Result;
+            _ListPeriodo1 = GetListPeriodo1().Result;
+            _ListPeriodo2 = GetListPeriodo2().Result;
+            _ListPeriodo3 = GetListPeriodo3().Result;
+            _ListGen1 = GetListGen1().Result;
+            _ListGen2 = GetListGen2().Result;
+            _ListGen3 = GetListGen3().Result;
+            _ListGen4 = GetListGen4().Result;
+            _ListAlumno = GetListAlumno().Result;
+        }
         public short LabelIdAlumno
         {
             get { return _LabelIdAlumno; }
@@ -96,32 +133,566 @@ namespace AppXamarinForms.ViewModels.AlumnoCarrera
                 }
             }
         }
-
-
-        public int LabelIdReticula
+        #region Alumno
+        public async Task<List<string>> GetListAlumno()
         {
-            get { return _LabelIdReticula; }
+            var listaCarrera = await IFicSrvAlumnoCarreraAdd.FicMetGetListAlumno();
+            List<string> aux = new List<string>();
+            if (listaCarrera != null)
+            {
+                foreach (rh_cat_personas carreras in listaCarrera)
+                {
+                    aux.Add(carreras.Nombre);
+                }
+                return aux;
+            }
+            return null;
+        }
+        public List<string> ListAlumno
+        {
+            get { return _ListAlumno; }
             set
             {
                 if (value != null)
                 {
-                    _LabelIdReticula = value;
-                    RaisePropertyChanged("LabelIdReticula");
+                    _ListAlumno = value;
+                    RaisePropertyChanged("ListAlunmno");
                 }
             }
         }
-        public short LabelIdEspecialidad
+        public string Alumno
         {
-            get { return _LabelIdEspecialidad; }
+            get { return _Alumno; }
             set
             {
                 if (value != null)
                 {
-                    _LabelIdEspecialidad = value;
-                    RaisePropertyChanged("LabelIdEspecialidad");
+                    _Alumno = value;
+                    FicGlobalValues.ALUMNO = value;
+                    RaisePropertyChanged("Alumno");
                 }
             }
         }
+        public Int16 ALIndex
+        {
+            get { return _AlIndex; }
+            set
+            {
+                _AlIndex = FicGlobalValues.ALUMNO_INDEX = value;
+                RaisePropertyChanged("AlIndex");
+            }
+        }
+        #endregion
+
+        #region Carrera
+        public async Task<List<string>> GetListCarrera()
+        {
+            var listaCarrera = await IFicSrvAlumnoCarreraAdd.FicMetGetListCarrera();
+            List<string> aux = new List<string>();
+            if (listaCarrera != null)
+            {
+                foreach (eva_cat_carreras carreras in listaCarrera)
+                {
+                    aux.Add(carreras.Alias);
+                }
+                return aux;
+            }
+            return null;
+        }
+        public List<string> ListCarrera
+        {
+            get { return _ListCarrera; }
+            set{
+                if (value != null)
+                {
+                    _ListCarrera = value;
+                    RaisePropertyChanged("ListCarrera");
+                }
+            }
+        }
+        public string Carrera
+        {
+            get { return _Carrera; }
+            set {
+                if (value != null)
+                {
+                    _Carrera = value;
+                    FicGlobalValues.CARRERA = value;
+                    RaisePropertyChanged("Carrera");
+                }
+            }
+        }
+        public Int16 CaIndex
+        {
+            get { return _CaIndex; }
+            set
+            {
+                _CaIndex = FicGlobalValues.CARRERA_INDEX = value;
+                RaisePropertyChanged("CaIndex");
+            }
+        }
+        #endregion
+
+        #region Reticula
+        public async Task<List<string>> GetListReticula()
+        {
+            var listaCarrera = await IFicSrvAlumnoCarreraAdd.FicMetGetListReticula();
+            List<string> aux = new List<string>();
+            if (listaCarrera != null)
+            {
+                foreach (eva_cat_reticulas carreras in listaCarrera)
+                {
+                    aux.Add(carreras.DesReticula);
+                }
+                return aux;
+            }
+            return null;
+        }
+        public List<string> ListReticula
+        {
+            get { return _ListReticula; }
+            set
+            {
+                if (value != null)
+                {
+                    _ListReticula = value;
+                    RaisePropertyChanged("ListReticula");
+                }
+            }
+        }
+        public string Reticula
+        {
+            get { return _Reticula; }
+            set
+            {
+                if (value != null)
+                {
+                    _Reticula = value;
+                    FicGlobalValues.RETICULA = value;
+                    RaisePropertyChanged("Reticula");
+                }
+            }
+        }
+        public Int16 ReIndex
+        {
+            get { return _ReIndex; }
+            set
+            {
+                _ReIndex = FicGlobalValues.RETICULA_INDEX = value;
+                RaisePropertyChanged("ReIndex");
+            }
+        }
+        #endregion
+
+        #region Especialidad
+        public async Task<List<string>> GetListEspecialidad()
+        {
+            var listaCarrera = await IFicSrvAlumnoCarreraAdd.FicMetGetListEspecialidad();
+            List<string> aux = new List<string>();
+            if (listaCarrera != null)
+            {
+                foreach (eva_cat_especialidades carreras in listaCarrera)
+                {
+                    aux.Add(carreras.DesEspecialidad);
+                }
+                return aux;
+            }
+            return null;
+        }
+        public List<string> ListEspecialidad
+        {
+            get { return _ListEspecialidad; }
+            set
+            {
+                if (value != null)
+                {
+                    _ListEspecialidad = value;
+                    RaisePropertyChanged("ListEspecialidad");
+                }
+            }
+        }
+        public string Especialidad
+        {
+            get { return _Especialidad; }
+            set
+            {
+                if (value != null)
+                {
+                    _Especialidad = value;
+                    FicGlobalValues.ESPECIALIDAD = value;
+                    RaisePropertyChanged("Especialidad");
+                }
+            }
+        }
+        public Int16 EsIndex
+        {
+            get { return _EsIndex; }
+            set
+            {
+                _EsIndex = FicGlobalValues.ESPECIALIDAD_INDEX = value;
+                RaisePropertyChanged("EsIndex");
+            }
+        }
+        #endregion
+
+        #region PeriocoActual        
+        public async Task<List<string>> GetListPeriodo1()
+        {
+            var listaCarrera = await IFicSrvAlumnoCarreraAdd.FicMetGetListPeriodo1();
+            List<string> aux = new List<string>();
+            if (listaCarrera != null)
+            {
+                foreach (cat_periodos carreras in listaCarrera)
+                {
+                    aux.Add(carreras.DesPeriodo);
+                }
+                return aux;
+            }
+            return null;
+        }
+        public List<string> ListPeriodo1
+        {
+            get { return _ListPeriodo1; }
+            set
+            {
+                if (value != null)
+                {
+                    _ListPeriodo1 = value;
+                    RaisePropertyChanged("ListPeriodo1");
+                }
+            }
+        }
+        public string Periodo1
+        {
+            get { return _Periodo1; }
+            set
+            {
+                if (value != null)
+                {
+                    _Periodo1 = value;
+                    FicGlobalValues.PERIODO1 = value;
+                    RaisePropertyChanged("Periodo1");
+                }
+            }
+        }
+        public Int16 P1Index
+        {
+            get { return _P1Index; }
+            set
+            {
+                _P1Index = FicGlobalValues.PERIODO1_INDEX = value;
+                RaisePropertyChanged("P1Index");
+            }
+        }
+        #endregion
+
+        #region PeriocoAnt        
+        public async Task<List<string>> GetListPeriodo2()
+        {
+            var listaCarrera = await IFicSrvAlumnoCarreraAdd.FicMetGetListPeriodo2();
+            List<string> aux = new List<string>();
+            if (listaCarrera != null)
+            {
+                foreach (cat_periodos carreras in listaCarrera)
+                {
+                    aux.Add(carreras.DesPeriodo);
+                }
+                return aux;
+            }
+            return null;
+        }
+        public List<string> ListPeriodo2
+        {
+            get { return _ListPeriodo2; }
+            set
+            {
+                if (value != null)
+                {
+                    _ListPeriodo2 = value;
+                    RaisePropertyChanged("ListPeriodo2");
+                }
+            }
+        }
+        public string Periodo2
+        {
+            get { return _Periodo2; }
+            set
+            {
+                if (value != null)
+                {
+                    _Periodo2 = value;
+                    FicGlobalValues.PERIODO2 = value;
+                    RaisePropertyChanged("Periodo2");
+                }
+            }
+        }
+        public Int16 P2Index
+        {
+            get { return _P2Index; }
+            set
+            {
+                _P2Index = FicGlobalValues.PERIODO2_INDEX = value;
+                RaisePropertyChanged("P2Index");
+            }
+        }
+        #endregion
+
+        #region PeriocoTitulo        
+        public async Task<List<string>> GetListPeriodo3()
+        {
+            var listaCarrera = await IFicSrvAlumnoCarreraAdd.FicMetGetListPeriodo3();
+            List<string> aux = new List<string>();
+            if (listaCarrera != null)
+            {
+                foreach (cat_periodos carreras in listaCarrera)
+                {
+                    aux.Add(carreras.DesPeriodo);
+                }
+                return aux;
+            }
+            return null;
+        }
+        public List<string> ListPeriodo3
+        {
+            get { return _ListPeriodo3; }
+            set
+            {
+                if (value != null)
+                {
+                    _ListPeriodo1 = value;
+                    RaisePropertyChanged("ListPeriodo3");
+                }
+            }
+        }
+        public string Periodo3
+        {
+            get { return _Periodo3; }
+            set
+            {
+                if (value != null)
+                {
+                    _Periodo3 = value;
+                    FicGlobalValues.PERIODO3 = value;
+                    RaisePropertyChanged("Periodo3");
+                }
+            }
+        }
+        public Int16 P3Index
+        {
+            get { return _P3Index; }
+            set
+            {
+                _P3Index = FicGlobalValues.PERIODO3_INDEX = value;
+                RaisePropertyChanged("P3Index");
+            }
+        }
+        #endregion
+
+        #region General1       
+        public async Task<List<string>> GetListGen1()
+        {
+            var listaCarrera = await IFicSrvAlumnoCarreraAdd.FicMetGetListGen1();
+            List<string> aux = new List<string>();
+            if (listaCarrera != null)
+            {
+                foreach (cat_generales carreras in listaCarrera)
+                {
+                    aux.Add(carreras.DesGeneral);
+                }
+                return aux;
+            }
+            return null;
+        }
+        public List<string> ListGen1
+        {
+            get { return _ListGen1; }
+            set
+            {
+                if (value != null)
+                {
+                    _ListGen1 = value;
+                    RaisePropertyChanged("ListGen1");
+                }
+            }
+        }
+        public string Gen1
+        {
+            get { return _Gen1; }
+            set
+            {
+                if (value != null)
+                {
+                    _Gen1 = value;
+                    FicGlobalValues.GEN1 = value;
+                    RaisePropertyChanged("Gen1");
+                }
+            }
+        }
+        public Int16 G1Index
+        {
+            get { return _G1Index; }
+            set
+            {
+                _G1Index = FicGlobalValues.GEN1_INDEX = value;
+                RaisePropertyChanged("G1Index");
+            }
+        }
+        #endregion
+
+        #region General2       
+        public async Task<List<string>> GetListGen2()
+        {
+            var listaCarrera = await IFicSrvAlumnoCarreraAdd.FicMetGetListGen2();
+            List<string> aux = new List<string>();
+            if (listaCarrera != null)
+            {
+                foreach (cat_generales carreras in listaCarrera)
+                {
+                    aux.Add(carreras.DesGeneral);
+                }
+                return aux;
+            }
+            return null;
+        }
+        public List<string> ListGen2
+        {
+            get { return _ListGen2; }
+            set
+            {
+                if (value != null)
+                {
+                    _ListGen1 = value;
+                    RaisePropertyChanged("ListGen2");
+                }
+            }
+        }
+        public string Gen2
+        {
+            get { return _Gen2; }
+            set
+            {
+                if (value != null)
+                {
+                    _Gen2 = value;
+                    FicGlobalValues.GEN2 = value;
+                    RaisePropertyChanged("Gen2");
+                }
+            }
+        }
+        public Int16 G2Index
+        {
+            get { return _G2Index; }
+            set
+            {
+                _G2Index = FicGlobalValues.GEN2_INDEX = value;
+                RaisePropertyChanged("G2Index");
+            }
+        }
+        #endregion
+
+        #region General3      
+        public async Task<List<string>> GetListGen3()
+        {
+            var listaCarrera = await IFicSrvAlumnoCarreraAdd.FicMetGetListGen3();
+            List<string> aux = new List<string>();
+            if (listaCarrera != null)
+            {
+                foreach (cat_generales carreras in listaCarrera)
+                {
+                    aux.Add(carreras.DesGeneral);
+                }
+                return aux;
+            }
+            return null;
+        }
+        public List<string> ListGen3
+        {
+            get { return _ListGen3; }
+            set
+            {
+                if (value != null)
+                {
+                    _ListGen3 = value;
+                    RaisePropertyChanged("ListGen3");
+                }
+            }
+        }
+        public string Gen3
+        {
+            get { return _Gen3; }
+            set
+            {
+                if (value != null)
+                {
+                    _Gen3 = value;
+                    FicGlobalValues.GEN3 = value;
+                    RaisePropertyChanged("Gen3");
+                }
+            }
+        }
+        public Int16 G3Index
+        {
+            get { return _G3Index; }
+            set
+            {   
+                _G3Index = FicGlobalValues.GEN3_INDEX = value;
+                RaisePropertyChanged("G3Index");
+            }
+        }
+        #endregion
+
+        #region General4      
+        public async Task<List<string>> GetListGen4()
+        {
+            var listaCarrera = await IFicSrvAlumnoCarreraAdd.FicMetGetListGen4();
+            List<string> aux = new List<string>();
+            if (listaCarrera != null)
+            {
+                foreach (cat_generales carreras in listaCarrera)
+                {                    
+                    aux.Add(carreras.DesGeneral);
+                }
+                return aux;
+            }
+            return null;
+        }
+        public List<string> ListGen4
+        {
+            get { return _ListGen4; }
+            set
+            {
+                if (value != null)
+                {
+                    _ListGen4 = value;
+                    RaisePropertyChanged("ListGen4");
+                }
+            }
+        }
+        public string Gen4
+        {
+            get { return _Gen4; }
+            set
+            {
+                if (value != null)
+                {
+                    _Gen4 = value;
+                    FicGlobalValues.GEN4 = value;
+                    RaisePropertyChanged("Gen4");
+                }
+            }
+        }
+        public Int16 G4Index
+        {
+            get { return _G4Index; }
+            set
+            {
+                _G4Index = FicGlobalValues.GEN4_INDEX = value;
+                RaisePropertyChanged("G4Index");
+            }
+        }
+        #endregion
+
+
         public DateTime LabelFechaIngreso
         {
             get { return _LabelFechaIngreso; }
@@ -266,42 +837,7 @@ namespace AppXamarinForms.ViewModels.AlumnoCarrera
                 }
             }
         }
-        public short LabelIdPeriodoIngreso
-        {
-            get { return _LabelIdPeriodoIngreso; }
-            set
-            {
-                if (value != null)
-                {
-                    _LabelIdPeriodoIngreso = value;
-                    RaisePropertyChanged("LabelIdPeriodoIngreso");
-                }
-            }
-        }
-        public short LabelIdPeriodoUltimo
-        {
-            get { return _LabelIdPeriodoUltimo; }
-            set
-            {
-                if (value != null)
-                {
-                    _LabelIdPeriodoUltimo = value;
-                    RaisePropertyChanged("LabelIdPeriodoUltimo");
-                }
-            }
-        }
-        public short LabelIdPeriodoTitulacion
-        {
-            get { return _LabelIdPeriodoTitulacion; }
-            set
-            {
-                if (value != null)
-                {
-                    _LabelIdPeriodoTitulacion = value;
-                    RaisePropertyChanged("LabelIdPeriodoTitulacion");
-                }
-            }
-        }
+        
         public short LabelIdTipoGenPlanEstudio
         {
             get { return _LabelIdTipoGenPlanEstudio; }
@@ -423,56 +959,7 @@ namespace AppXamarinForms.ViewModels.AlumnoCarrera
             }
 
         }        
-        public DateTime LabelFechaReg
-        {
-            get { return _LabelFechaReg; }
-            set
-            {
-                if (value != null)
-                {
-                    _LabelFechaReg = value;
-                    RaisePropertyChanged("LabelFechaReg");
-                }
-            }
-        }
-
-        public DateTime LabelFechaUltMod
-        {
-            get { return _LabelFechaUltMod; }
-            set
-            {
-                if (value != null)
-                {
-                    _LabelFechaUltMod = value;
-                    RaisePropertyChanged("LabelFechaULtMod");
-                }
-            }
-        }
-        public string LabelUsuarioReg
-        {
-            get { return _LabelUsuarioReg; }
-            set
-            {
-                if (value != null)
-                {
-                    _LabelUsuarioReg = value;
-                    RaisePropertyChanged("LabelUsuarioReg");
-                }
-            }
-        }
-
-        public string LabelUsuarioMod
-        {
-            get { return _LabelUsuarioMod; }
-            set
-            {
-                if (value != null)
-                {
-                    _LabelUsuarioMod = value;
-                    RaisePropertyChanged("LabelUsuarioMod");
-                }
-            }
-        }
+        
         
         public async void OnAppearing()
         {
@@ -509,55 +996,54 @@ namespace AppXamarinForms.ViewModels.AlumnoCarrera
         private async void SaveCommandExecute()
         {
             try
-            {
+            {               
                 var RespuestaInsert = await IFicSrvAlumnoCarreraAdd.InsertAlumnos(new eva_alumnos_carreras()
-                {
-                    IdCarrera = LabelIdCarrera,                   
-                    IdAlumno = LabelIdAlumno,
-                    IdReticula = LabelIdReticula,
-                    IdEspecialidad = LabelIdEspecialidad,
-                    FechaIngreso = LabelFechaIngreso,
-                    FechaEgreso = LabelFechaEgreso,
-                    FechaTitulacion = LabelFechaTitulacion,
-                    FechaUltModSII = LabelFechaUltModSII,
-                    PromedioActual = LabelPromedioActual,
-                    PromedioPeriodoAnt = LabelPromedioPeriodoAnt,
-                    PromedioFinal = LabelPromedioFinal,
-                    CreditosAprobados = LabelCreditosAprobados,
-                    CreditosCursados = LabelCreditosCursados,
-                    TotalPuntosVigentes = LabelTotalPuntosVigentes,
-                    TotalPuntosGenerados = LabelTotalPuntosGenerados,
-                    SemestreActual = LabelSemestreActual,
-                    IdPeriodoIngreso = LabelIdPeriodoIngreso,
-                    IdPeriodoUltimo = LabelIdPeriodoUltimo,
-                    IdPeriodoTitulacion = LabelIdPeriodoTitulacion,
+                    {
+                        IdCarrera = CaIndex,
+                        IdAlumno = LabelIdAlumno,
+                        IdReticula = ReIndex,
+                        IdEspecialidad = EsIndex,
 
-                    IdTipoGenPlanEstudio = LabelIdTipoGenPlanEstudio,
-                    IdGenPlanEstudio = LabelIdGenPlanEstudio,
-                    IdTipoGenOpcionTitulacion = LabelIdTipoGenOpcionTitulacion,
-                    IdGenOpcionTitulacion = LabelIdGenOpcionTitulacion,
-                    IdTipoGenNivelEscolar = LabelIdTipoGenNivelEscolar,
-                    IdGenNivelEscolar = LabelIdGenNivelEscolar,
-                    IdTipoGenIngreso = LabelIdTipoGenIngreso,
-                    IdGenIngreso = LabelIdGenIngreso,
+                        FechaIngreso = LabelFechaIngreso,
+                        FechaEgreso = LabelFechaEgreso,
+                        FechaTitulacion = LabelFechaTitulacion,
+                        FechaUltModSII = LabelFechaUltModSII,
 
-                    Activo = LabelActivo,
-                    Borrado = LabelBorrado,
-                    FechaReg = DateTime.Now,
-                    UsuarioReg = "root",
-                    FechaUltMod = DateTime.Now,
-                    UsuarioMod = "root"
-                });
+                        PromedioActual = LabelPromedioActual,
+                        PromedioPeriodoAnt = LabelPromedioPeriodoAnt,
+                        PromedioFinal = LabelPromedioFinal,
+                        CreditosAprobados = LabelCreditosAprobados,
+                        CreditosCursados = LabelCreditosCursados,
+                        TotalPuntosVigentes = LabelTotalPuntosVigentes,
+                        TotalPuntosGenerados = LabelTotalPuntosGenerados,
+                        SemestreActual = LabelSemestreActual,
 
-                if (RespuestaInsert == "OK")
-                {
-                    await new Page().DisplayAlert("ADD", "¡INSERTADO CON EXITO!", "OK");
-                    IFicSrvNavigationEdificiosList.FicMetNavigateTo<FicVmAlumnoCarreraList>(FicNavigationContextC);
-                }
-                else
-                {
-                    await new Page().DisplayAlert("ADD", RespuestaInsert.ToString(), "OK");
-                }//SE INSERTO EL CONTEO?
+                        IdPeriodoIngreso = P1Index,
+                        IdPeriodoUltimo = P2Index,
+                        IdPeriodoTitulacion = P3Index,
+
+                        IdTipoGenPlanEstudio = 25,
+                        IdGenPlanEstudio = G1Index,
+                        IdTipoGenOpcionTitulacion = 27,
+                        IdGenOpcionTitulacion = G2Index,
+                        IdTipoGenNivelEscolar = 17,
+                        IdGenNivelEscolar = G3Index,
+                        IdTipoGenIngreso = 28,
+                        IdGenIngreso = G4Index,
+
+                        Activo = LabelActivo,
+                        Borrado = LabelBorrado,
+                        FechaReg = DateTime.Now,
+                        UsuarioReg = "root",
+                        FechaUltMod = DateTime.Now,
+                        UsuarioMod = ""
+                    });
+
+                    if (RespuestaInsert == "OK")
+                    {
+                        await new Page().DisplayAlert("ADD", "¡INSERTADO CON EXITO!", "OK");
+                        IFicSrvNavigationEdificiosList.FicMetNavigateTo<FicVmAlumnoCarreraList>(FicNavigationContextC);
+                    }else { await new Page().DisplayAlert("ADD", RespuestaInsert.ToString(), "OK"); }//SE INSERTO EL CONTEO?                
             }
             catch (Exception e)
             {

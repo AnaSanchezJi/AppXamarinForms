@@ -44,7 +44,7 @@ namespace AppXamarinForms.Views.Navegacion
                                                 FicPageName ="FicViExportarWebApi",
                                                 TargetType = typeof(FicViExportarWebApi)
                                                 },*/
-                    new FicMasterPageMenuItem { Id = 0, Title = "Edificios",
+                    new FicMasterPageMenuItem { Id = 0, Title = "Alumos Carreras",
                                                 //Icon ="ficAlmacen20x20.png",
                                                 FicPageName ="FicViCatEdificiosList",
                                                 TargetType = typeof(FicViAlumnoCarreraList)
