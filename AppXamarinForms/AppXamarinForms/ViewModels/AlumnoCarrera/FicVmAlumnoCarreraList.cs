@@ -19,6 +19,7 @@ namespace AppXamarinForms.ViewModels.AlumnoCarrera
         public ObservableCollection<eva_alumnos_carreras> _FicSfDataGrid_ItemSource_Alumnos;
         public eva_alumnos_carreras _FicSfDataGrid_SelectItem_Alumnos;
         public ObservableCollection<rh_cat_personas> _FicSfDataGrid_ItemSource_Persona;
+        public rh_cat_personas _FicSfDataGrid_SelectItem_Persona;
         private ICommand _FicMetAddAlumnoICommand;
         private ICommand _FicMetUpdateAlumnoICommand;
         private ICommand _FicMetRemoveAlumnoICommand;

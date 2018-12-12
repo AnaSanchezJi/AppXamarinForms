@@ -58,6 +58,7 @@
 
                     <StackLayout Orientation="Horizontal">
                         <Label Text="PromedioActual : " FontAttributes="Bold" FontSize="Micro"/>
+                        
                         <Entry Text="{Binding LabelPromedioActual}" FontSize="Micro"  HorizontalOptions="FillAndExpand"/>
                     </StackLayout>
                     <StackLayout Orientation="Horizontal">
@@ -71,7 +72,7 @@
 
                     <StackLayout Orientation="Horizontal">
                         <Label Text="CreditosAprobados: " FontAttributes="Bold" FontSize="Micro"/>
-                        <Entry Text="{Binding LabelCreditosAprovados}" FontSize="Micro" HorizontalOptions="FillAndExpand"/>
+                        <Entry Text="{Binding LabelCreditosAprobados}" FontSize="Micro" HorizontalOptions="FillAndExpand"/>
                     </StackLayout>
                     <StackLayout Orientation="Horizontal">
                         <Label Text="CreditosCursados " FontAttributes="Bold" FontSize="Micro"/>

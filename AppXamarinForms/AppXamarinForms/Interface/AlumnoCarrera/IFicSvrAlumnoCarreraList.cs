@@ -14,6 +14,7 @@ namespace AppXamarinForms.Interface.AlumnoCarrera
     {
         Task<IEnumerable<eva_alumnos_carreras>> FicMetGetListAlumnos();
         Task<string> RemoveAlumnos(eva_alumnos_carreras eva_alumnos_carreras);
+        Task<rh_cat_personas> FicMetGetListDetalleAlumnos(int c);
         Task<eva_cat_carreras> FicMetGetListCarrera(int c);
         Task<eva_cat_reticulas> FicMetGetListReticula(int re);
         Task<eva_cat_especialidades> FicMetGetListEspecialidad(int es);

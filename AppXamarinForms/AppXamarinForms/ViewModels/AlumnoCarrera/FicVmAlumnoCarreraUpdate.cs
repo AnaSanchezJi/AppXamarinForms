@@ -9,6 +9,8 @@ using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
 using AppXamarinForms.Models;
+using System.Threading.Tasks;
+using AppXamarinForms.Data;
 
 namespace AppXamarinForms.ViewModels.AlumnoCarrera
 {
@@ -17,10 +19,13 @@ namespace AppXamarinForms.ViewModels.AlumnoCarrera
         private IFicSrvNavegationCatEdificiosList IFicSrvNavigationEdificios;
         private IFicSrvAlumnoCarreraUpdate IFicSrvAlumnoCarreraUpdate;
 
-        private short _LabelIdCarrera;
         private int _LabelIdAlumno;
-        private int _LabelIdReticula;
-        private short _LabelIdEspecialidad;
+        public Int16 _CarreraId;        
+        private List<string> _Carrera;
+        public Int16 _ReticulaId;
+        private List<string> _Reticula;   
+        public Int16 _EspecialidadId;
+        private List<string> _Especialidad;        
         private DateTime _LabelFechaIngreso;
         private DateTime _LabelFechaEgreso;
         private DateTime _LabelFechaTitulacion;
@@ -32,19 +37,26 @@ namespace AppXamarinForms.ViewModels.AlumnoCarrera
         private double _LabelCreditosCursados;
         private double _LabelTotalPuntosVigentes;
         private double _LabelTotalPuntosGenerados;
-        private short _LabelSemestreActual;
-        private short _LabelIdPeriodoIngreso;
-        private short _LabelIdPeriodoUltimo;
+        private short _LabelSemestreActual;        
+        public Int16 _PeriodoIngresoId;
+        private List<string> _PeriodoIngreso;        
+        public Int16 _PeriodoUltimoId;
+        private List<string> _PeriodoUltimo;
         private short _LabelIdPeriodoTitulacion;
-
+        public Int16 _PeriodoTitulacionId;
+        private List<string> _PeriodoTitulacion;
         private short _LabelIdTipoGenPlanEstudio;
-        private short _LabelIdGenPlanEstudio;
-        private short _LabelIdTipoGenOpcionTitulacion;
-        private short _LabelIdGenOpcionTitulacion;
-        private short _LabelIdTipoGenNivelEscolar;
-        private short _LabelIdGenNivelEscolar;
+        public Int16 _PlanEstudioId;
+        private List<string> _PlanEstudio;
+        private short _LabelIdTipoGenOpcionTitulacion;        
+        public Int16 _OpcionTitulacionId;
+        private List<string> _OpcionTitulacion;
+        private short _LabelIdTipoGenNivelEscolar;        
+        public Int16 _NivelEscolarId;
+        private List<string> _NivelEscolar;
         private short _LabelIdTipoGenIngreso;
-        private short _LabelIdGenIngreso;
+        public Int16 _IngresoId;
+        private List<string> _Ingreso;
 
         private string _LabelActivo;
         private string _LabelBorrado;
@@ -61,21 +73,66 @@ namespace AppXamarinForms.ViewModels.AlumnoCarrera
         {
             this.IFicSrvNavigationEdificios = IFicSrvNavigationEdificios;
             this.IFicSrvAlumnoCarreraUpdate = IFicSrvAlumnoCarreraUpdate;
+
+            _Carrera = GetListCarrera().Result;
+            _Reticula = GetListReticula().Result;
+            _Especialidad = GetListEspecialidad().Result;
+            _PeriodoIngreso = GetListP1().Result;
+            _PeriodoUltimo = GetListP2().Result;
+            _PeriodoTitulacion = GetListP3().Result;
+            _PlanEstudio = GetListG1().Result;
+            _OpcionTitulacion = GetListG2().Result;
+            _NivelEscolar = GetListG3().Result;
+            _Ingreso = GetListG4().Result;
         }
 
-        public short LabelIdCarrera
+        #region CA
+        public async Task<List<string>> GetListCarrera()
         {
-            get { return _LabelIdCarrera; }
+            try
+            {
+                var periodos = await IFicSrvAlumnoCarreraUpdate.FicMetGetListCarrera();
+                if (periodos != null)
+                {
+                    List<string> aux = new List<string>();
+                    foreach (eva_cat_carreras per in periodos)
+                    {
+                        aux.Add(per.Alias);
+                    }
+                    return aux;
+                }//Llenar el grid
+                return null;
+            }
+            catch (Exception e)
+            {
+                await new Page().DisplayAlert("ALERTA", e.Message.ToString(), "OK");
+                return null;
+            }
+
+        }
+        public List<string> Carrera
+        {
+            get { return _Carrera; }
             set
             {
-                if (value != null)
-                {
-                    _LabelIdCarrera = value;
-                    RaisePropertyChanged("LabelIdCarrera");
-                }
+                _Carrera = value;
+                RaisePropertyChanged("Carrera");
             }
         }
-
+        public Int16 CarreraId
+        {
+            get
+            {
+                return _CarreraId;
+            }
+            set
+            {
+                _CarreraId = value;
+                FicGlobalValues.CARRERA_INDEX = value;
+                RaisePropertyChanged("CarreraId");
+            }
+        }
+        #endregion
         public int LabelIdAlumno
         {
             get { return _LabelIdAlumno; }
@@ -88,32 +145,100 @@ namespace AppXamarinForms.ViewModels.AlumnoCarrera
                 }
             }
         }
-
-
-        public int LabelIdReticula
+        #region Reticula
+        public async Task<List<string>> GetListReticula()
         {
-            get { return _LabelIdReticula; }
+            try
+            {
+                var periodos = await IFicSrvAlumnoCarreraUpdate.FicMetGetListReticula();
+                if (periodos != null)
+                {
+                    List<string> aux = new List<string>();
+                    foreach (eva_cat_reticulas per in periodos)
+                    {
+                        aux.Add(per.DesReticula);
+                    }
+                    return aux;
+                }//Llenar el grid
+                return null;
+            }
+            catch (Exception e)
+            {
+                await new Page().DisplayAlert("ALERTA", e.Message.ToString(), "OK");
+                return null;
+            }
+
+        }
+        public List<string> Reticula
+        {
+            get { return _Reticula; }
             set
             {
-                if (value != null)
-                {
-                    _LabelIdReticula = value;
-                    RaisePropertyChanged("LabelIdReticula");
-                }
+                _Reticula = value;
+                RaisePropertyChanged("Reticula");
             }
         }
-        public short LabelIdEspecialidad
+        public Int16 ReticulaId
         {
-            get { return _LabelIdEspecialidad; }
+            get
+            {
+                return _ReticulaId;
+            }
             set
             {
-                if (value != null)
-                {
-                    _LabelIdEspecialidad = value;
-                    RaisePropertyChanged("LabelIdEspecialidad");
-                }
+                _ReticulaId = value;
+                FicGlobalValues.RETICULA_INDEX = value;
+                RaisePropertyChanged("ReticulaId");
             }
         }
+        #endregion
+        #region Especialidad
+        public async Task<List<string>> GetListEspecialidad()
+        {
+            try
+            {
+                var periodos = await IFicSrvAlumnoCarreraUpdate.FicMetGetListEspecialidad();
+                if (periodos != null)
+                {
+                    List<string> aux = new List<string>();
+                    foreach (eva_cat_especialidades per in periodos)
+                    {
+                        aux.Add(per.DesEspecialidad);
+                    }
+                    return aux;
+                }//Llenar el grid
+                return null;
+            }
+            catch (Exception e)
+            {
+                await new Page().DisplayAlert("ALERTA", e.Message.ToString(), "OK");
+                return null;
+            }
+
+        }
+        public List<string> Especialidad
+        {
+            get { return _Especialidad; }
+            set
+            {
+                _Especialidad = value;
+                RaisePropertyChanged("Especialidad");
+            }
+        }
+        public Int16 EspecialidadId
+        {
+            get
+            {
+                return _EspecialidadId;
+            }
+            set
+            {
+                _EspecialidadId = value;
+                FicGlobalValues.ESPECIALIDAD_INDEX = value;
+                RaisePropertyChanged("ReticulaId");
+            }
+        }
+        #endregion
         public DateTime LabelFechaIngreso
         {
             get { return _LabelFechaIngreso; }
@@ -258,42 +383,147 @@ namespace AppXamarinForms.ViewModels.AlumnoCarrera
                 }
             }
         }
-        public short LabelIdPeriodoIngreso
+        #region P1
+        public async Task<List<string>> GetListP1()
         {
-            get { return _LabelIdPeriodoIngreso; }
+            try
+            {
+                var periodos = await IFicSrvAlumnoCarreraUpdate.FicMetGetListPeriodo1();
+                if (periodos != null)
+                {
+                    List<string> aux = new List<string>();
+                    foreach (cat_periodos per in periodos)
+                    {
+                        aux.Add(per.DesPeriodo);
+                    }
+                    return aux;
+                }//Llenar el grid
+                return null;
+            }
+            catch (Exception e)
+            {
+                await new Page().DisplayAlert("ALERTA", e.Message.ToString(), "OK");
+                return null;
+            }
+
+        }
+        public List<string> PeriodoIngreso
+        {
+            get { return _PeriodoIngreso; }
             set
             {
-                if (value != null)
-                {
-                    _LabelIdPeriodoIngreso = value;
-                    RaisePropertyChanged("LabelIdPeriodoIngreso");
-                }
+                _PeriodoIngreso = value;
+                RaisePropertyChanged("PeriodoIngreso");
             }
         }
-        public short LabelIdPeriodoUltimo
+        public Int16 PeriodoIngresoId
         {
-            get { return _LabelIdPeriodoUltimo; }
+            get
+            {
+                return _PeriodoIngresoId;
+            }
             set
             {
-                if (value != null)
-                {
-                    _LabelIdPeriodoUltimo = value;
-                    RaisePropertyChanged("LabelIdPeriodoUltimo");
-                }
+                _PeriodoIngresoId = value;
+                FicGlobalValues.PERIODO1_INDEX= value;
+                RaisePropertyChanged("PeriodoIngresoId");
             }
         }
-        public short LabelIdPeriodoTitulacion
+        #endregion
+        #region P2
+        public async Task<List<string>> GetListP2()
         {
-            get { return _LabelIdPeriodoTitulacion; }
+            try
+            {
+                var periodos = await IFicSrvAlumnoCarreraUpdate.FicMetGetListPeriodo2();
+                if (periodos != null)
+                {
+                    List<string> aux = new List<string>();
+                    foreach (cat_periodos per in periodos)
+                    {
+                        aux.Add(per.DesPeriodo);
+                    }
+                    return aux;
+                }//Llenar el grid
+                return null;
+            }
+            catch (Exception e)
+            {
+                await new Page().DisplayAlert("ALERTA", e.Message.ToString(), "OK");
+                return null;
+            }
+
+        }
+        public List<string> PeriodoUltimo
+        {
+            get { return _PeriodoUltimo; }
             set
             {
-                if (value != null)
-                {
-                    _LabelIdPeriodoTitulacion = value;
-                    RaisePropertyChanged("LabelIdPeriodoTitulacion");
-                }
+                _PeriodoUltimo = value;
+                RaisePropertyChanged("PeriodoUltimo");
             }
         }
+        public Int16 PeriodoUltimoId
+        {
+            get
+            {
+                return _PeriodoUltimoId;
+            }
+            set
+            {
+                _PeriodoUltimoId = value;
+                FicGlobalValues.PERIODO2_INDEX = value;
+                RaisePropertyChanged("PeriodoUltimoId");
+            }
+        }
+        #endregion
+        #region P3
+        public async Task<List<string>> GetListP3()
+        {
+            try
+            {
+                var periodos = await IFicSrvAlumnoCarreraUpdate.FicMetGetListPeriodo3();
+                if (periodos != null)
+                {
+                    List<string> aux = new List<string>();
+                    foreach (cat_periodos per in periodos)
+                    {
+                        aux.Add(per.DesPeriodo);
+                    }
+                    return aux;
+                }//Llenar el grid
+                return null;
+            }
+            catch (Exception e)
+            {
+                await new Page().DisplayAlert("ALERTA", e.Message.ToString(), "OK");
+                return null;
+            }
+
+        }
+        public List<string> PeriodoTitulacion
+        {
+            get { return _PeriodoTitulacion; }
+            set
+            {
+                _PeriodoTitulacion = value;
+                RaisePropertyChanged("PeriodoUltimo");
+            }
+        }
+        public Int16 PeriodoTitulacionId
+        {
+            get
+            {
+                return _PeriodoTitulacionId;
+            }
+            set
+            {
+                _PeriodoTitulacionId = value;
+                FicGlobalValues.PERIODO3_INDEX = value;
+                RaisePropertyChanged("PeriodoTitulacionId");
+            }
+        }
+        #endregion
         public short LabelIdTipoGenPlanEstudio
         {
             get { return _LabelIdTipoGenPlanEstudio; }
@@ -306,18 +536,53 @@ namespace AppXamarinForms.ViewModels.AlumnoCarrera
                 }
             }
         }
-        public short LabelIdGenPlanEstudio
+        #region G1
+        public async Task<List<string>> GetListG1()
         {
-            get { return _LabelIdGenPlanEstudio; }
+            try
+            {
+                var periodos = await IFicSrvAlumnoCarreraUpdate.FicMetGetListGen1();
+                if (periodos != null)
+                {
+                    List<string> aux = new List<string>();
+                    foreach (cat_generales per in periodos)
+                    {
+                        aux.Add(per.DesGeneral);
+                    }
+                    return aux;
+                }//Llenar el grid
+                return null;
+            }
+            catch (Exception e)
+            {
+                await new Page().DisplayAlert("ALERTA", e.Message.ToString(), "OK");
+                return null;
+            }
+
+        }
+        public List<string> PlanEstudio
+        {
+            get { return _PlanEstudio; }
             set
             {
-                if (value != null)
-                {
-                    _LabelIdGenPlanEstudio = value;
-                    RaisePropertyChanged("LabelIdGenPlanEstudio");
-                }
+                _PlanEstudio = value;
+                RaisePropertyChanged("PlanEstudio");
             }
         }
+        public Int16 PlanEstudioId
+        {
+            get
+            {
+                return _PlanEstudioId;
+            }
+            set
+            {
+                _PlanEstudioId = value;
+                FicGlobalValues.GEN1_INDEX = value;
+                RaisePropertyChanged("PlanEstudioId");
+            }
+        }
+        #endregion
         public short LabelIdTipoGenOpcionTitulacion
         {
             get { return _LabelIdTipoGenOpcionTitulacion; }
@@ -330,18 +595,53 @@ namespace AppXamarinForms.ViewModels.AlumnoCarrera
                 }
             }
         }
-        public short LabelIdGenOpcionTitulacion
+        #region G2
+        public async Task<List<string>> GetListG2()
         {
-            get { return _LabelIdGenOpcionTitulacion; }
+            try
+            {
+                var periodos = await IFicSrvAlumnoCarreraUpdate.FicMetGetListGen2();
+                if (periodos != null)
+                {
+                    List<string> aux = new List<string>();
+                    foreach (cat_generales per in periodos)
+                    {
+                        aux.Add(per.DesGeneral);
+                    }
+                    return aux;
+                }//Llenar el grid
+                return null;
+            }
+            catch (Exception e)
+            {
+                await new Page().DisplayAlert("ALERTA", e.Message.ToString(), "OK");
+                return null;
+            }
+
+        }
+        public List<string> OpcionTitulacion
+        {
+            get { return _OpcionTitulacion; }
             set
             {
-                if (value != null)
-                {
-                    _LabelIdGenOpcionTitulacion = value;
-                    RaisePropertyChanged("LabelIdGenOpcionTitulacion");
-                }
+                _OpcionTitulacion = value;
+                RaisePropertyChanged("OpcionTitulacion");
             }
         }
+        public Int16 OpcionTitulacionId
+        {
+            get
+            {
+                return _OpcionTitulacionId;
+            }
+            set
+            {
+                _OpcionTitulacionId = value;
+                FicGlobalValues.GEN2_INDEX = value;
+                RaisePropertyChanged("OpcionTitulacionId");
+            }
+        }
+        #endregion        
         public short LabelIdTipoGenNivelEscolar
         {
             get { return _LabelIdTipoGenNivelEscolar; }
@@ -354,18 +654,53 @@ namespace AppXamarinForms.ViewModels.AlumnoCarrera
                 }
             }
         }
-        public short LabelIdGenNivelEscolar
+        #region G3
+        public async Task<List<string>> GetListG3()
         {
-            get { return _LabelIdGenNivelEscolar; }
+            try
+            {
+                var periodos = await IFicSrvAlumnoCarreraUpdate.FicMetGetListGen3();
+                if (periodos != null)
+                {
+                    List<string> aux = new List<string>();
+                    foreach (cat_generales per in periodos)
+                    {
+                        aux.Add(per.DesGeneral);
+                    }
+                    return aux;
+                }//Llenar el grid
+                return null;
+            }
+            catch (Exception e)
+            {
+                await new Page().DisplayAlert("ALERTA", e.Message.ToString(), "OK");
+                return null;
+            }
+
+        }
+        public List<string> NivelEscolar
+        {
+            get { return _NivelEscolar; }
             set
             {
-                if (value != null)
-                {
-                    _LabelIdGenNivelEscolar = value;
-                    RaisePropertyChanged("LabelIdGenNivelEscolar");
-                }
+                _NivelEscolar = value;
+                RaisePropertyChanged("NivelEscolar");
             }
         }
+        public Int16 NivelEscolarId
+        {
+            get
+            {
+                return _NivelEscolarId;
+            }
+            set
+            {
+                _NivelEscolarId = value;
+                FicGlobalValues.GEN3_INDEX = value;
+                RaisePropertyChanged("NivelEscolarId");
+            }
+        }
+        #endregion                
         public short LabelIdTipoGenIngreso
         {
             get { return _LabelIdTipoGenIngreso; }
@@ -378,18 +713,53 @@ namespace AppXamarinForms.ViewModels.AlumnoCarrera
                 }
             }
         }
-        public short LabelIdGenIngreso
+        #region G3
+        public async Task<List<string>> GetListG4()
         {
-            get { return _LabelIdGenIngreso; }
+            try
+            {
+                var periodos = await IFicSrvAlumnoCarreraUpdate.FicMetGetListGen4();
+                if (periodos != null)
+                {
+                    List<string> aux = new List<string>();
+                    foreach (cat_generales per in periodos)
+                    {
+                        aux.Add(per.DesGeneral);
+                    }
+                    return aux;
+                }//Llenar el grid
+                return null;
+            }
+            catch (Exception e)
+            {
+                await new Page().DisplayAlert("ALERTA", e.Message.ToString(), "OK");
+                return null;
+            }
+
+        }
+        public List<string> Ingreso
+        {
+            get { return _Ingreso; }
             set
             {
-                if (value != null)
-                {
-                    _LabelIdGenIngreso = value;
-                    RaisePropertyChanged("LabelIdGenIngreso");
-                }
+                _NivelEscolar = value;
+                RaisePropertyChanged("Ingreso");
             }
         }
+        public Int16 IngresoId
+        {
+            get
+            {
+                return _IngresoId;
+            }
+            set
+            {
+                _IngresoId = value;
+                FicGlobalValues.GEN4_INDEX = value;
+                RaisePropertyChanged("IngresoId");
+            }
+        }
+        #endregion                
         public string LabelActivo
         {
             get { return _LabelActivo; }
@@ -427,7 +797,6 @@ namespace AppXamarinForms.ViewModels.AlumnoCarrera
                 }
             }
         }
-
         public DateTime LabelFechaUltMod
         {
             get { return _LabelFechaUltMod; }
@@ -452,7 +821,6 @@ namespace AppXamarinForms.ViewModels.AlumnoCarrera
                 }
             }
         }
-
         public string LabelUsuarioMod
         {
             get { return _LabelUsuarioMod; }
@@ -465,13 +833,14 @@ namespace AppXamarinForms.ViewModels.AlumnoCarrera
                 }
             }
         }
+
         public async void OnAppearing()
         {
             var source_eva_alumnos_carreras = FicNavigationContextC as eva_alumnos_carreras;
-            _LabelIdCarrera = source_eva_alumnos_carreras.IdCarrera;
+            _CarreraId = (Int16)(source_eva_alumnos_carreras.IdCarrera-1);      
             _LabelIdAlumno = source_eva_alumnos_carreras.IdAlumno;
-            _LabelIdReticula = source_eva_alumnos_carreras.IdEspecialidad;
-            _LabelIdEspecialidad = source_eva_alumnos_carreras.IdEspecialidad;
+            _ReticulaId =(Int16)(source_eva_alumnos_carreras.IdEspecialidad-1);
+            _EspecialidadId = (Int16)(source_eva_alumnos_carreras.IdEspecialidad-1);
             _LabelFechaIngreso = source_eva_alumnos_carreras.FechaIngreso;
             _LabelFechaEgreso = source_eva_alumnos_carreras.FechaEgreso;
             _LabelFechaTitulacion = source_eva_alumnos_carreras.FechaTitulacion;
@@ -484,18 +853,17 @@ namespace AppXamarinForms.ViewModels.AlumnoCarrera
             _LabelTotalPuntosVigentes = source_eva_alumnos_carreras.TotalPuntosVigentes;
             _LabelTotalPuntosGenerados = source_eva_alumnos_carreras.TotalPuntosGenerados;
             _LabelSemestreActual = source_eva_alumnos_carreras.SemestreActual;
-            _LabelIdPeriodoIngreso = source_eva_alumnos_carreras.IdPeriodoIngreso;
-            _LabelIdPeriodoUltimo = source_eva_alumnos_carreras.IdPeriodoUltimo;
-            _LabelIdPeriodoTitulacion = source_eva_alumnos_carreras.IdPeriodoTitulacion;
-
+            _PeriodoIngresoId =(Int16) (source_eva_alumnos_carreras.IdPeriodoIngreso-1);
+            _PeriodoUltimoId =(Int16) (source_eva_alumnos_carreras.IdPeriodoUltimo-1);
+            _PeriodoTitulacionId = (Int16) (source_eva_alumnos_carreras.IdPeriodoTitulacion-1);
             _LabelIdTipoGenPlanEstudio = source_eva_alumnos_carreras.IdTipoGenPlanEstudio;
-            _LabelIdGenPlanEstudio = source_eva_alumnos_carreras.IdGenPlanEstudio;
+            _PlanEstudioId = (Int16)(source_eva_alumnos_carreras.IdGenPlanEstudio-1);
             _LabelIdTipoGenOpcionTitulacion = source_eva_alumnos_carreras.IdTipoGenOpcionTitulacion;
-            _LabelIdGenOpcionTitulacion = source_eva_alumnos_carreras.IdGenOpcionTitulacion;
+            _OpcionTitulacionId = (Int16)(source_eva_alumnos_carreras.IdGenOpcionTitulacion-1);
             _LabelIdTipoGenNivelEscolar = source_eva_alumnos_carreras.IdTipoGenNivelEscolar;
-            _LabelIdGenNivelEscolar = source_eva_alumnos_carreras.IdTipoGenNivelEscolar;
+            _NivelEscolarId = (Int16)(source_eva_alumnos_carreras.IdTipoGenNivelEscolar-1);
             _LabelIdTipoGenIngreso = source_eva_alumnos_carreras.IdTipoGenIngreso;
-            _LabelIdGenIngreso = source_eva_alumnos_carreras.IdTipoGenIngreso;
+            _IngresoId = (Int16)(source_eva_alumnos_carreras.IdTipoGenIngreso-1);
 
             _LabelActivo = source_eva_alumnos_carreras.Activo;
             _LabelBorrado = source_eva_alumnos_carreras.Borrado;
@@ -504,10 +872,10 @@ namespace AppXamarinForms.ViewModels.AlumnoCarrera
             _LabelFechaUltMod = source_eva_alumnos_carreras.FechaUltMod;
             _LabelUsuarioMod = source_eva_alumnos_carreras.UsuarioMod;
 
-            RaisePropertyChanged("LabelIdCarrera");
             RaisePropertyChanged("LabelIdAlumno");
-            RaisePropertyChanged("LabelIdReticula");
-            RaisePropertyChanged("LabelIdEspecialidad");
+            RaisePropertyChanged("CarreraId");            
+            RaisePropertyChanged("ReticulaId");
+            RaisePropertyChanged("EspecialidadId");
             RaisePropertyChanged("LabelFechaIngreso");
             RaisePropertyChanged("LabelFechaEgreso");
             RaisePropertyChanged("LabelFechaTitulacion");
@@ -520,17 +888,17 @@ namespace AppXamarinForms.ViewModels.AlumnoCarrera
             RaisePropertyChanged("LabelTotalPuntosVigentes");
             RaisePropertyChanged("LabelTotalPuntosGenerados");
             RaisePropertyChanged("LabelSemestreActual");
-            RaisePropertyChanged("LabelIdPeriodoIngreso");
-            RaisePropertyChanged("LabelIdPeriodoUltimo");
-            RaisePropertyChanged("LabelIdPeriodoTitulacion");
+            RaisePropertyChanged("PeriodoIngresoId");
+            RaisePropertyChanged("PeriodoUltimoId");
+            RaisePropertyChanged("PeriodoTitulacionId");
             RaisePropertyChanged("LabelIdTipoGenPlanEstudio");
-            RaisePropertyChanged("LabelIdGenPlanEstudio");
+            RaisePropertyChanged("PlanEstudioId");
             RaisePropertyChanged("LabelIdTipoGenOpcionTitulacion");
-            RaisePropertyChanged("LabelIdGenOpcionTitulacion");
+            RaisePropertyChanged("OpcionTitulacionId");
             RaisePropertyChanged("LabelIdTipoGenNivelEscolar");
-            RaisePropertyChanged("LabelIdGenNivelEscolar");
+            RaisePropertyChanged("NivelEscolarId");
             RaisePropertyChanged("LabelIdTipoGenIngreso");
-            RaisePropertyChanged("LabelIdGenIngreso");
+            RaisePropertyChanged("IngresoId");
             RaisePropertyChanged("LabelActivo");
             RaisePropertyChanged("LabelBorrado");
             RaisePropertyChanged("LabelFechaReg");
@@ -542,7 +910,7 @@ namespace AppXamarinForms.ViewModels.AlumnoCarrera
         }
 
         #region MANEJO DE COMANDOS        
-        public ICommand FicMetRegesarCatEdificiosListICommand
+        public ICommand FicMetRegesarAlumnosListICommand
         {
             get
             {
@@ -572,13 +940,13 @@ namespace AppXamarinForms.ViewModels.AlumnoCarrera
         {
             var source_eva_alumnos_carreras = FicNavigationContextC as eva_alumnos_carreras;
             try
-            {
+            {                
                 var RespuestaInsert = await IFicSrvAlumnoCarreraUpdate.UpdateAlumno(new eva_alumnos_carreras()
                 {
-                IdCarrera = LabelIdCarrera,
                 IdAlumno = source_eva_alumnos_carreras.IdAlumno,
-                IdReticula = LabelIdEspecialidad,
-                IdEspecialidad = LabelIdEspecialidad,
+                IdCarrera = (Int16)(this._CarreraId + 1),                
+                IdReticula = this._ReticulaId+1,
+                IdEspecialidad = (Int16)(this._EspecialidadId +1),
                 FechaIngreso = LabelFechaIngreso,
                 FechaEgreso = LabelFechaEgreso,
                 FechaTitulacion = LabelFechaTitulacion,
@@ -591,18 +959,19 @@ namespace AppXamarinForms.ViewModels.AlumnoCarrera
                 TotalPuntosVigentes = LabelTotalPuntosVigentes,
                 TotalPuntosGenerados = LabelTotalPuntosGenerados,
                 SemestreActual = LabelSemestreActual,
-                IdPeriodoIngreso = LabelIdPeriodoIngreso,
-                IdPeriodoUltimo = LabelIdPeriodoUltimo,
-                IdPeriodoTitulacion = LabelIdPeriodoTitulacion,
 
-                IdTipoGenPlanEstudio = LabelIdTipoGenPlanEstudio,
-                IdGenPlanEstudio = LabelIdGenPlanEstudio,
-                IdTipoGenOpcionTitulacion = LabelIdTipoGenOpcionTitulacion,
-                IdGenOpcionTitulacion = LabelIdGenOpcionTitulacion,
-                IdTipoGenNivelEscolar = LabelIdTipoGenNivelEscolar,
-                IdGenNivelEscolar = LabelIdTipoGenNivelEscolar,
-                IdTipoGenIngreso = LabelIdTipoGenIngreso,
-                IdGenIngreso = LabelIdTipoGenIngreso,
+                IdPeriodoIngreso = (Int16)(this._PeriodoIngresoId + 1),
+                IdPeriodoUltimo = (Int16)(this._PeriodoUltimoId + 1),
+                IdPeriodoTitulacion = (Int16)(this._PeriodoUltimoId + 1),
+
+                IdTipoGenPlanEstudio = 25,
+                IdGenPlanEstudio = (Int16)(this._PlanEstudioId + 1),
+                IdTipoGenOpcionTitulacion = 17,
+                IdGenOpcionTitulacion = (Int16)(this._OpcionTitulacionId + 1),
+                IdTipoGenNivelEscolar = 27,
+                IdGenNivelEscolar = (Int16)(this._NivelEscolarId + 1),
+                IdTipoGenIngreso = 28,
+                IdGenIngreso = (Int16)(this._IngresoId + 1),
 
                 Activo = LabelActivo,
                 Borrado = LabelBorrado,

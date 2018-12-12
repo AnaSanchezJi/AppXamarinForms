@@ -736,7 +736,7 @@ namespace AppXamarinForms.ViewModels.AlumnoCarrera
             {
                 if (value != null)
                 {
-                    _LabelFechaEgreso = value;
+                    _LabelFechaUltModSII = value;
                     RaisePropertyChanged("LabelFechaUltModSII");
                 }
             }
@@ -966,7 +966,7 @@ namespace AppXamarinForms.ViewModels.AlumnoCarrera
 
         }
 
-        public ICommand FicMetRegesarCatEdificiosListICommand
+        public ICommand FicMetRegesarAlumnoListICommand
         {
             get
             {
@@ -999,10 +999,10 @@ namespace AppXamarinForms.ViewModels.AlumnoCarrera
             {               
                 var RespuestaInsert = await IFicSrvAlumnoCarreraAdd.InsertAlumnos(new eva_alumnos_carreras()
                     {
-                        IdCarrera = CaIndex,
-                        IdAlumno = LabelIdAlumno,
-                        IdReticula = ReIndex,
-                        IdEspecialidad = EsIndex,
+                        IdCarrera = Convert.ToInt16(CaIndex+1),
+                        IdAlumno = Convert.ToInt16(ALIndex+1),
+                        IdReticula = Convert.ToInt16(ReIndex+1),
+                        IdEspecialidad = Convert.ToInt16(EsIndex +1),
 
                         FechaIngreso = LabelFechaIngreso,
                         FechaEgreso = LabelFechaEgreso,
@@ -1018,18 +1018,18 @@ namespace AppXamarinForms.ViewModels.AlumnoCarrera
                         TotalPuntosGenerados = LabelTotalPuntosGenerados,
                         SemestreActual = LabelSemestreActual,
 
-                        IdPeriodoIngreso = P1Index,
-                        IdPeriodoUltimo = P2Index,
-                        IdPeriodoTitulacion = P3Index,
+                        IdPeriodoIngreso = Convert.ToInt16(P1Index + 1),
+                        IdPeriodoUltimo = Convert.ToInt16(P2Index +1),
+                        IdPeriodoTitulacion = Convert.ToInt16(P3Index +1),
 
                         IdTipoGenPlanEstudio = 25,
-                        IdGenPlanEstudio = G1Index,
+                        IdGenPlanEstudio = Convert.ToInt16(G1Index + 1),
                         IdTipoGenOpcionTitulacion = 27,
-                        IdGenOpcionTitulacion = G2Index,
+                        IdGenOpcionTitulacion = Convert.ToInt16(G2Index+1),
                         IdTipoGenNivelEscolar = 17,
-                        IdGenNivelEscolar = G3Index,
+                        IdGenNivelEscolar = Convert.ToInt16(G3Index+1),
                         IdTipoGenIngreso = 28,
-                        IdGenIngreso = G4Index,
+                        IdGenIngreso = Convert.ToInt16(G4Index+1),
 
                         Activo = LabelActivo,
                         Borrado = LabelBorrado,

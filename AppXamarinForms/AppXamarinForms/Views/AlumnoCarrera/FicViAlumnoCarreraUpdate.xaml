@@ -27,28 +27,26 @@
                     </StackLayout>
                     <StackLayout Orientation="Horizontal">
                         <Label Text="IdCarrera: " FontAttributes="Bold" FontSize="Micro"/>
-                        <Entry Text="{Binding LabelIdCarrera}" FontSize="Micro" HorizontalOptions="FillAndExpand" />
+                        <Picker SelectedIndex="{Binding CarreraId}" ItemsSource="{Binding Carrera}" HorizontalOptions="FillAndExpand"></Picker>
                     </StackLayout>
                     <StackLayout Orientation="Horizontal">
                         <Label Text="IdReticula: " FontAttributes="Bold" FontSize="Micro"/>
-                        <Entry Text="{Binding LabelIdReticula}" FontSize="Micro" HorizontalOptions="FillAndExpand"/>
+                        <Picker SelectedIndex="{Binding ReticulaId}" ItemsSource="{Binding Reticula}" HorizontalOptions="FillAndExpand"></Picker>
                     </StackLayout>
 
                     <StackLayout Orientation="Horizontal">
                         <Label Text="IdEspecialidad: " FontAttributes="Bold" FontSize="Micro"/>
-                        <Entry Text="{Binding LabelIdEspecialidad}" FontSize="Micro" HorizontalOptions="FillAndExpand"/>
+                        <Picker SelectedIndex="{Binding EspecialidadId}" ItemsSource="{Binding Especialidad}" HorizontalOptions="FillAndExpand"></Picker>
                     </StackLayout>
 
                     <StackLayout Orientation="Horizontal">
                         <Label Text="FechaIngreso: " FontAttributes="Bold" FontSize="Micro"/>
                         <Entry Text="{Binding LabelFechaIngreso}" FontSize="Micro" HorizontalOptions="FillAndExpand"/>
                     </StackLayout>
-
                     <StackLayout Orientation="Horizontal">
                         <Label Text="FechaEgreso : " FontAttributes="Bold" FontSize="Micro"/>
                         <Entry Text="{Binding LabelFechaEgreso}" FontSize="Micro" HorizontalOptions="FillAndExpand"/>
                     </StackLayout>
-
                     <StackLayout Orientation="Horizontal">
                         <Label Text="FechaTitulacion : " FontAttributes="Bold" FontSize="Micro"/>
                         <Entry Text="{Binding LabelFechaTitulacion}" FontSize="Micro"  HorizontalOptions="FillAndExpand"/>
@@ -57,26 +55,25 @@
                         <Label Text="FechaUltModSII : " FontAttributes="Bold" FontSize="Micro"/>
                         <Entry Text="{Binding LabelFechaUltModSII}" FontSize="Micro"  HorizontalOptions="FillAndExpand"/>
                     </StackLayout>
+
                     <StackLayout Orientation="Horizontal">
                         <Label Text="PromedioActual : " FontAttributes="Bold" FontSize="Micro"/>
-                        <Entry Text="{Binding LabelPromedioActual}" FontSize="Micro" HorizontalOptions="FillAndExpand"/>
-                    </StackLayout>
 
+                        <Entry Text="{Binding LabelPromedioActual}" FontSize="Micro"  HorizontalOptions="FillAndExpand"/>
+                    </StackLayout>
                     <StackLayout Orientation="Horizontal">
                         <Label Text="PromedioPeriodoAnt: " FontAttributes="Bold" FontSize="Micro"/>
-                        <Entry Text="{Binding LabelPromedioPeriodoAnt}" FontSize="Micro" HorizontalOptions="FillAndExpand"/>
+                        <Entry Text="{Binding LabelPromedioPeriodoAnt}" FontSize="Micro"  HorizontalOptions="FillAndExpand"/>
                     </StackLayout>
-
                     <StackLayout Orientation="Horizontal">
                         <Label Text="PromedioFinal:  " FontAttributes="Bold" FontSize="Micro"/>
-                        <Entry Text="{Binding LabelPromedioFinal}" FontSize="Micro" HorizontalOptions="FillAndExpand"/>
+                        <Entry Text="{Binding LabelPromedioFinal}" FontSize="Micro"  HorizontalOptions="FillAndExpand"/>
                     </StackLayout>
 
                     <StackLayout Orientation="Horizontal">
                         <Label Text="CreditosAprobados: " FontAttributes="Bold" FontSize="Micro"/>
-                        <Entry Text="{Binding LabelCreditosAprovados}" FontSize="Micro" HorizontalOptions="FillAndExpand"/>
+                        <Entry Text="{Binding LabelCreditosAprobados}" FontSize="Micro" HorizontalOptions="FillAndExpand"/>
                     </StackLayout>
-
                     <StackLayout Orientation="Horizontal">
                         <Label Text="CreditosCursados " FontAttributes="Bold" FontSize="Micro"/>
                         <Entry Text="{Binding LabelCreditosCursados}" FontSize="Micro" HorizontalOptions="FillAndExpand" />
@@ -86,7 +83,6 @@
                         <Label Text="TotalPuntosVigentes: " FontAttributes="Bold" FontSize="Micro"/>
                         <Entry Text="{Binding LabelTotalPuntosVigentes}" FontSize="Micro" HorizontalOptions="FillAndExpand"/>
                     </StackLayout>
-
                     <StackLayout Orientation="Horizontal">
                         <Label Text="TotalPuntosGenerados : " FontAttributes="Bold" FontSize="Micro"/>
                         <Entry Text="{Binding LabelTotalPuntosGenerados }" FontSize="Micro" HorizontalOptions="FillAndExpand"/>
@@ -95,51 +91,35 @@
                         <Label Text="SemestreActual : " FontAttributes="Bold" FontSize="Micro"/>
                         <Entry Text="{Binding LabelSemestreActual }" FontSize="Micro" HorizontalOptions="FillAndExpand"/>
                     </StackLayout>
-
+                    
                     <StackLayout Orientation="Horizontal">
                         <Label Text="IdPeriodoIngreso : " FontAttributes="Bold" FontSize="Micro"/>
-                        <Entry Text="{Binding LabelIdPeriodoIngreso }" FontSize="Micro" HorizontalOptions="FillAndExpand"/>
+                        <Picker SelectedIndex="{Binding PeriodoIngresoId}" ItemsSource="{Binding PeriodoIngreso}" HorizontalOptions="FillAndExpand"></Picker>
                     </StackLayout>
                     <StackLayout Orientation="Horizontal">
                         <Label Text="IdPeriodoUltimo : " FontAttributes="Bold" FontSize="Micro"/>
-                        <Entry Text="{Binding LabelIdPeriodoUltimo }" FontSize="Micro" HorizontalOptions="FillAndExpand" />
+                        <Picker SelectedIndex="{Binding PeriodoUltimoId}" ItemsSource="{Binding PeriodoUltimo}" HorizontalOptions="FillAndExpand"></Picker>
                     </StackLayout>
                     <StackLayout Orientation="Horizontal">
                         <Label Text="IdPeriodoTitulacion : " FontAttributes="Bold" FontSize="Micro"/>
-                        <Entry Text="{Binding LabelIdPeriodoTitulacion }" FontSize="Micro" HorizontalOptions="FillAndExpand"/>
+                        <Picker SelectedIndex="{Binding PeriodoTitulacionId}" ItemsSource="{Binding PeriodoTitulacion}" HorizontalOptions="FillAndExpand"></Picker>
                     </StackLayout>
 
                     <StackLayout Orientation="Horizontal">
-                        <Label Text="IdTipoGenPlanEstudio : " FontAttributes="Bold" FontSize="Micro"/>
-                        <Entry Text="{Binding LabelIdTipoGenPlanEstudio }" FontSize="Micro" HorizontalOptions="FillAndExpand"/>
-                    </StackLayout>
-                    <StackLayout Orientation="Horizontal">
                         <Label Text="IdGenPlanEstudio : " FontAttributes="Bold" FontSize="Micro"/>
-                        <Entry Text="{Binding LabelIdGenPlanEstudio }" FontSize="Micro" HorizontalOptions="FillAndExpand" />
-                    </StackLayout>
-                    <StackLayout Orientation="Horizontal">
-                        <Label Text="IdTipoGenOpcionTitulacion : " FontAttributes="Bold" FontSize="Micro"/>
-                        <Entry Text="{Binding LabelIdTipoGenOpcionTitulacion }" FontSize="Micro" HorizontalOptions="FillAndExpand"/>
+                        <Picker SelectedIndex="{Binding PlanEstudioId}" ItemsSource="{Binding PlanEstudio}" HorizontalOptions="FillAndExpand"></Picker>
                     </StackLayout>
                     <StackLayout Orientation="Horizontal">
                         <Label Text="IdGenOpcionTitulacion  : " FontAttributes="Bold" FontSize="Micro"/>
-                        <Entry Text="{Binding LabelIdGenOpcionTitulacion }" FontSize="Micro" HorizontalOptions="FillAndExpand"/>
-                    </StackLayout>
-                    <StackLayout Orientation="Horizontal">
-                        <Label Text="IdTipoGenNivelEscolar : " FontAttributes="Bold" FontSize="Micro"/>
-                        <Entry Text="{Binding LabelIdTipoGenNivelEscolar }" FontSize="Micro" HorizontalOptions="FillAndExpand"/>
+                        <Picker SelectedIndex="{Binding OpcionTitulacionId}" ItemsSource="{Binding OpcionTitulacion}" HorizontalOptions="FillAndExpand"></Picker>
                     </StackLayout>
                     <StackLayout Orientation="Horizontal">
                         <Label Text="IdGenNivelEscolar  : " FontAttributes="Bold" FontSize="Micro"/>
-                        <Entry Text="{Binding LabelIdGenNivelEscolar  }" FontSize="Micro" HorizontalOptions="FillAndExpand" />
-                    </StackLayout>
-                    <StackLayout Orientation="Horizontal">
-                        <Label Text="IdTipoGenIngreso  : " FontAttributes="Bold" FontSize="Micro"/>
-                        <Entry Text="{Binding LabelIdTipoGenIngreso }" FontSize="Micro" HorizontalOptions="FillAndExpand"/>
+                        <Picker SelectedIndex="{Binding NivelEscolarId}" ItemsSource="{Binding NivelEscolar}" HorizontalOptions="FillAndExpand"></Picker>
                     </StackLayout>
                     <StackLayout Orientation="Horizontal">
                         <Label Text="IdGenIngreso  : " FontAttributes="Bold" FontSize="Micro"/>
-                        <Entry Text="{Binding LabelIdGenIngreso }" FontSize="Micro" HorizontalOptions="FillAndExpand"/>
+                        <Picker SelectedIndex="{Binding IngresoId}" ItemsSource="{Binding Ingreso}" HorizontalOptions="FillAndExpand"></Picker>
                     </StackLayout>
 
                     <StackLayout Orientation="Horizontal">

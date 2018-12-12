@@ -122,12 +122,12 @@
                
                 <StackLayout Orientation="Horizontal">
                     <Label Text="IdGenNivelEscolar  : " FontAttributes="Bold" FontSize="Micro"/>
-                    <Label Text="{Binding LabelIdGenNivelEscolar  }" FontSize="Micro" HorizontalOptions="FillAndExpand" />
+                        <Label Text="{Binding LabelIdGenNivelEscolar  }" FontSize="Micro" HorizontalOptions="FillAndExpand" />
                 </StackLayout>               
                 
                 <StackLayout Orientation="Horizontal">
                     <Label Text="IdGenIngreso  : " FontAttributes="Bold" FontSize="Micro"/>
-                    <Label Text="{Binding LabelIdGenIngreso }" FontSize="Micro" HorizontalOptions="FillAndExpand"/>
+                        <Label Text="{Binding LabelIdGenIngreso }" FontSize="Micro" HorizontalOptions="FillAndExpand"/>
                 </StackLayout>
                 
                 <StackLayout Orientation="Horizontal">

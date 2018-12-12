@@ -36,6 +36,8 @@ namespace AppXamarinForms.Services.AlumnoCarrera
             return await (from ed in FicLoBDContext.eva_alumnos_carreras select ed).AsNoTracking().ToListAsync();
         }
 
+        
+
         public async Task<eva_cat_carreras> FicMetGetListCarrera(int c)
         {
             List<eva_cat_carreras> aux = await(from asignatura in FicLoBDContext.eva_cat_carreras select asignatura).Where((asignatura) => asignatura.IdCarrera == c).AsNoTracking().ToListAsync();
@@ -58,7 +60,7 @@ namespace AppXamarinForms.Services.AlumnoCarrera
 
         public async Task<cat_generales> FicMetGetListGen1(int g1)
         {
-            List<cat_generales> aux = await (from asignatura in FicLoBDContext.cat_generales select asignatura).Where((asignatura) => asignatura.IdGeneral == g1).AsNoTracking().ToListAsync();
+            List<cat_generales> aux = await (from asignatura in FicLoBDContext.cat_generales select asignatura).Where((asignatura) => asignatura.IdTipoGeneral == 27).AsNoTracking().ToListAsync();
             cat_generales asignaturaItem = new cat_generales();
             aux.ForEach(item => {
                 asignaturaItem = item;
@@ -68,7 +70,7 @@ namespace AppXamarinForms.Services.AlumnoCarrera
 
         public async Task<cat_generales> FicMetGetListGen2(int g2)
         {
-            List<cat_generales> aux = await (from asignatura in FicLoBDContext.cat_generales select asignatura).Where((asignatura) => asignatura.IdGeneral == g2).AsNoTracking().ToListAsync();
+            List<cat_generales> aux = await (from asignatura in FicLoBDContext.cat_generales select asignatura).Where((asignatura) => asignatura.IdTipoGeneral == 17).AsNoTracking().ToListAsync();
             cat_generales asignaturaItem = new cat_generales();
             aux.ForEach(item => {
                 asignaturaItem = item;
@@ -78,7 +80,7 @@ namespace AppXamarinForms.Services.AlumnoCarrera
 
         public async Task<cat_generales> FicMetGetListGen3(int g3)
         {
-            List<cat_generales> aux = await(from asignatura in FicLoBDContext.cat_generales select asignatura).Where((asignatura) => asignatura.IdGeneral == g3).AsNoTracking().ToListAsync();
+            List<cat_generales> aux = await(from asignatura in FicLoBDContext.cat_generales select asignatura).Where((asignatura) => asignatura.IdTipoGeneral == 27).AsNoTracking().ToListAsync();
             cat_generales asignaturaItem = new cat_generales();
             aux.ForEach(item => {
                 asignaturaItem = item;
@@ -88,7 +90,7 @@ namespace AppXamarinForms.Services.AlumnoCarrera
 
         public async Task<cat_generales> FicMetGetListGen4(int g4)
         {
-            List<cat_generales> aux = await(from asignatura in FicLoBDContext.cat_generales select asignatura).Where((asignatura) => asignatura.IdGeneral == g4).AsNoTracking().ToListAsync();
+            List<cat_generales> aux = await(from asignatura in FicLoBDContext.cat_generales select asignatura).Where((asignatura) => asignatura.IdTipoGeneral == 28).AsNoTracking().ToListAsync();
             cat_generales asignaturaItem = new cat_generales();
             aux.ForEach(item => {
                 asignaturaItem = item;
@@ -140,6 +142,15 @@ namespace AppXamarinForms.Services.AlumnoCarrera
         {
             FicLoBDContext.Remove(eva_alumnos_carreras);
             return await FicLoBDContext.SaveChangesAsync() > 0 ? "OK" : "ERROR AL ELIMINAR";
+        }
+
+        Task<rh_cat_personas> IFicSvrAlumnoCarreraList.FicMetGetListDetalleAlumnos(int c)
+        {
+            throw new NotImplementedException();
+        }
+        public async Task<IEnumerable<rh_cat_personas>> FicMetGetListDetalleAlumnos(int c)
+        {
+            return await (from ed in FicLoBDContext.rh_cat_personas where ed.IdPersona == c select ed).AsNoTracking().ToListAsync();
         }
     }
 }

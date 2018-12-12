@@ -38,22 +38,22 @@ namespace AppXamarinForms.Services.AlumnoCarrera
 
         public async Task<IEnumerable<cat_generales>> FicMetGetListGen1()
         {
-            return await(from carrera in FicDBLoContext.cat_generales select carrera).AsNoTracking().ToListAsync();
+            return await(from carrera in FicDBLoContext.cat_generales select carrera).Where((carrera) => carrera.IdTipoGeneral == 25).AsNoTracking().ToListAsync();
         }
 
         public async Task<IEnumerable<cat_generales>> FicMetGetListGen2()
         {
-            return await(from carrera in FicDBLoContext.cat_generales select carrera).AsNoTracking().ToListAsync();
+            return await(from carrera in FicDBLoContext.cat_generales select carrera).Where((carrera) => carrera.IdTipoGeneral == 27).AsNoTracking().ToListAsync();
         }
 
         public async Task<IEnumerable<cat_generales>> FicMetGetListGen3()
         {
-            return await(from carrera in FicDBLoContext.cat_generales select carrera).AsNoTracking().ToListAsync();
+            return await(from carrera in FicDBLoContext.cat_generales select carrera).Where((carrera) => carrera.IdTipoGeneral == 17).AsNoTracking().ToListAsync();
         }
 
         public  async Task<IEnumerable<cat_generales>> FicMetGetListGen4()
         {
-            return await(from carrera in FicDBLoContext.cat_generales select carrera).AsNoTracking().ToListAsync();
+            return await(from carrera in FicDBLoContext.cat_generales select carrera).AsNoTracking().Where((carrera) => carrera.IdTipoGeneral == 28).AsNoTracking().ToListAsync();
         }
 
         public async Task<IEnumerable<cat_periodos>> FicMetGetListPeriodo1()
