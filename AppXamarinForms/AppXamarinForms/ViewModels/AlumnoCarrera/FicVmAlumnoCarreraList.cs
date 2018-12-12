@@ -55,6 +55,13 @@ namespace AppXamarinForms.ViewModels.AlumnoCarrera
                 return _FicSfDataGrid_ItemSource_Alumnos;
             }
         }//Apunta al BindigContext al grid del view
+        public ObservableCollection<rh_cat_personas> FicSfDataGrid_ItemSource_Personas
+        {
+            get
+            {
+                return _FicSfDataGrid_ItemSource_Persona;
+            }
+        }
 
         public eva_alumnos_carreras FicSfDataGrid_SelectItem_Alumnos
         {
@@ -71,6 +78,22 @@ namespace AppXamarinForms.ViewModels.AlumnoCarrera
                 }
             }
         }////Apunta al grid seleccionado de la view
+
+        public rh_cat_personas FicSfDataGrid_SelectItem_Persona
+        {
+            get
+            {
+                return _FicSfDataGrid_SelectItem_Persona;
+            }
+            set
+            {
+                if (value != null)
+                {
+                    _FicSfDataGrid_SelectItem_Persona = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
 
         public ICommand FicMetAddAlumnoICommand
         {

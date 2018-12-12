@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:numeric="clr-namespace:Syncfusion.SfNumericUpDown.XForms;assembly=Syncfusion.SfNumericUpDown.XForms"
-             xmlns:syncfusion="clr-namespace:Syncfusion.SfAutoComplete.XForms;assembly=Syncfusion.SfAutoComplete.XForms"
+             xmlns:numeric="clr-namespace:Syncfusion.SfNumericUpDown.XForms;assembly=Syncfusion.SfNumericUpDown.XForms"             
+             xmlns:autocomplete="clr-namespace:Syncfusion.SfAutoComplete.XForms;assembly=Syncfusion.SfAutoComplete.XForms"
              x:Class="AppXamarinForms.Views.AlumnoCarrera.FicViAlumnoCarreraAdd">
     <ContentPage.ToolbarItems>
         <ToolbarItem 
@@ -24,19 +24,22 @@
                     </StackLayout>
                     <StackLayout Orientation="Horizontal">
                         <Label Text="IdAlumno: " FontAttributes="Bold" FontSize="Micro"/>
-                        <Picker SelectedItem="{Binding Alumno}" SelectedIndex="{Binding AlIndex}" HorizontalOptions="StartAndExpand" ItemsSource="{Binding ListAlumno}"></Picker>
+                        <!--<StackLayout VerticalOptions="Start" HorizontalOptions="Start" Padding="30">
+                            <autocomplete:SfAutoComplete HeightRequest="40" x:Name="autoComplete" DataSource="ListAlumno"/>
+                        </StackLayout>-->
+                            <Picker SelectedItem="{Binding Alumno}" SelectedIndex="{Binding AlIndex}" HorizontalOptions="FillAndExpand" ItemsSource="{Binding ListAlumno}"></Picker>
                     </StackLayout>
                     <StackLayout Orientation="Horizontal">
                         <Label Text="IdCarrera: " FontAttributes="Bold" FontSize="Micro"/>
-                        <Picker SelectedItem="{Binding Carrera}" SelectedIndex="{Binding CaIndex}" HorizontalOptions="StartAndExpand" ItemsSource="{Binding ListCarrera}"></Picker>
+                            <Picker SelectedItem="{Binding Carrera}" SelectedIndex="{Binding CaIndex}" HorizontalOptions="FillAndExpand" ItemsSource="{Binding ListCarrera}"></Picker>
                     </StackLayout>
                     <StackLayout Orientation="Horizontal">
                         <Label Text="IdReticula: " FontAttributes="Bold" FontSize="Micro"/>
-                        <Picker SelectedItem="{Binding Reticula}" SelectedIndex="{Binding ReIndex}" HorizontalOptions="StartAndExpand" ItemsSource="{Binding ListReticula}"></Picker>
+                            <Picker SelectedItem="{Binding Reticula}" SelectedIndex="{Binding ReIndex}" HorizontalOptions="FillAndExpand" ItemsSource="{Binding ListReticula}"></Picker>
                     </StackLayout>
                     <StackLayout Orientation="Horizontal">
                         <Label Text="IdEspecialidad: " FontAttributes="Bold" FontSize="Micro"/>
-                        <Picker SelectedItem="{Binding Especialidad}" SelectedIndex="{Binding EsIndex}" HorizontalOptions="StartAndExpand" ItemsSource="{Binding ListEspecialidad}"></Picker>
+                            <Picker SelectedItem="{Binding Especialidad}" SelectedIndex="{Binding EsIndex}" HorizontalOptions="FillAndExpand" ItemsSource="{Binding ListEspecialidad}"></Picker>
                     </StackLayout>
 
                     <StackLayout Orientation="Horizontal">
@@ -58,7 +61,7 @@
 
                     <StackLayout Orientation="Horizontal">
                         <Label Text="PromedioActual : " FontAttributes="Bold" FontSize="Micro"/>
-                        
+                        <!--<numeric:SfNumericUpDown x:Name="numericUpDown" Maximum="100" Minimum="0" />-->
                         <Entry Text="{Binding LabelPromedioActual}" FontSize="Micro"  HorizontalOptions="FillAndExpand"/>
                     </StackLayout>
                     <StackLayout Orientation="Horizontal">
@@ -94,32 +97,32 @@
 
                     <StackLayout Orientation="Horizontal">
                         <Label Text="IdPeriodoIngreso : " FontAttributes="Bold" FontSize="Micro"/>
-                        <Picker SelectedItem="{Binding Periodo1}" SelectedIndex="{Binding P1Index}" HorizontalOptions="StartAndExpand" ItemsSource="{Binding ListPeriodo1}"></Picker>
+                        <Picker SelectedItem="{Binding Periodo1}" SelectedIndex="{Binding P1Index}" HorizontalOptions="FillAndExpand" ItemsSource="{Binding ListPeriodo1}"></Picker>
                     </StackLayout>
                     <StackLayout Orientation="Horizontal">
                         <Label Text="IdPeriodoUltimo : " FontAttributes="Bold" FontSize="Micro"/>
-                        <Picker SelectedItem="{Binding Periodo2}" SelectedIndex="{Binding P2Index}" HorizontalOptions="StartAndExpand" ItemsSource="{Binding ListPeriodo2}"></Picker>
+                        <Picker SelectedItem="{Binding Periodo2}" SelectedIndex="{Binding P2Index}" HorizontalOptions="FillAndExpand" ItemsSource="{Binding ListPeriodo2}"></Picker>
                     </StackLayout>
                     <StackLayout Orientation="Horizontal">
                             <Label Text="IdPeriodoTitulacion : " FontAttributes="Bold" FontSize="Micro"/>
-                            <Picker SelectedItem="{Binding Periodo3}" SelectedIndex="{Binding P3Index}" HorizontalOptions="StartAndExpand" ItemsSource="{Binding ListPeriodo3}"></Picker>
+                        <Picker SelectedItem="{Binding Periodo3}" SelectedIndex="{Binding P3Index}" HorizontalOptions="FillAndExpand" ItemsSource="{Binding ListPeriodo3}"></Picker>
                         </StackLayout>
 
                         <StackLayout Orientation="Horizontal">
                             <Label Text="IdGenPlanEstudio : " FontAttributes="Bold" FontSize="Micro"/>
-                        <Picker SelectedItem="{Binding Gen1}" SelectedIndex="{Binding G1Index}" HorizontalOptions="StartAndExpand" ItemsSource="{Binding ListGen1}"></Picker>
+                        <Picker SelectedItem="{Binding Gen1}" SelectedIndex="{Binding G1Index}" HorizontalOptions="FillAndExpand" ItemsSource="{Binding ListGen1}"></Picker>
                     </StackLayout>
                         <StackLayout Orientation="Horizontal">
                             <Label Text="IdGenOpcionTitulacion  : " FontAttributes="Bold" FontSize="Micro"/>
-                        <Picker SelectedItem="{Binding Gen2}" SelectedIndex="{Binding G2Index}" HorizontalOptions="StartAndExpand" ItemsSource="{Binding ListGen2}"></Picker>
+                        <Picker SelectedItem="{Binding Gen2}" SelectedIndex="{Binding G2Index}" HorizontalOptions="FillAndExpand" ItemsSource="{Binding ListGen2}"></Picker>
                     </StackLayout>
                         <StackLayout Orientation="Horizontal">
                             <Label Text="IdGenNivelEscolar  : " FontAttributes="Bold" FontSize="Micro"/>
-                        <Picker SelectedItem="{Binding Gen3}" SelectedIndex="{Binding G3Index}" HorizontalOptions="StartAndExpand" ItemsSource="{Binding ListGen3}"></Picker>
+                        <Picker SelectedItem="{Binding Gen3}" SelectedIndex="{Binding G3Index}" HorizontalOptions="FillAndExpand" ItemsSource="{Binding ListGen3}"></Picker>
                     </StackLayout>
                         <StackLayout Orientation="Horizontal">
                             <Label Text="IdGenIngreso  : " FontAttributes="Bold" FontSize="Micro"/>
-                        <Picker SelectedItem="{Binding Gen4}" SelectedIndex="{Binding G4Index}" HorizontalOptions="StartAndExpand" ItemsSource="{Binding ListGen4}"></Picker>
+                        <Picker SelectedItem="{Binding Gen4}" SelectedIndex="{Binding G4Index}" HorizontalOptions="FillAndExpand" ItemsSource="{Binding ListGen4}"></Picker>
                     </StackLayout>
 
                         <StackLayout Orientation="Horizontal">

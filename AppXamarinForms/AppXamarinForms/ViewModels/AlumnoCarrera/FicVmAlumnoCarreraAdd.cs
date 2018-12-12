@@ -12,6 +12,7 @@ using System.Runtime.CompilerServices;
 using AppXamarinForms.ViewModels.Base;
 using System.Threading.Tasks;
 using AppXamarinForms.Data;
+using Syncfusion.SfAutoComplete.XForms;
 
 
 namespace AppXamarinForms.ViewModels.AlumnoCarrera
@@ -121,7 +122,8 @@ namespace AppXamarinForms.ViewModels.AlumnoCarrera
             _ListGen4 = GetListGen4().Result;
             _ListAlumno = GetListAlumno().Result;
         }
-        public short LabelIdAlumno
+        
+       /* public short LabelIdAlumno
         {
             get { return _LabelIdAlumno; }
             set
@@ -132,7 +134,7 @@ namespace AppXamarinForms.ViewModels.AlumnoCarrera
                     RaisePropertyChanged("LabelIdAlumno");
                 }
             }
-        }
+        }***/
         #region Alumno
         public async Task<List<string>> GetListAlumno()
         {
@@ -173,7 +175,7 @@ namespace AppXamarinForms.ViewModels.AlumnoCarrera
                 }
             }
         }
-        public Int16 ALIndex
+        public Int16 AlIndex
         {
             get { return _AlIndex; }
             set
@@ -1000,7 +1002,7 @@ namespace AppXamarinForms.ViewModels.AlumnoCarrera
                 var RespuestaInsert = await IFicSrvAlumnoCarreraAdd.InsertAlumnos(new eva_alumnos_carreras()
                     {
                         IdCarrera = Convert.ToInt16(CaIndex+1),
-                        IdAlumno = Convert.ToInt16(ALIndex+1),
+                        IdAlumno = Convert.ToInt16(AlIndex+1),
                         IdReticula = Convert.ToInt16(ReIndex+1),
                         IdEspecialidad = Convert.ToInt16(EsIndex +1),
 
