@@ -18,13 +18,13 @@ namespace AppXamarinForms.ViewModels.AlumnoCarrera
     {
         public ObservableCollection<eva_alumnos_carreras> _FicSfDataGrid_ItemSource_Alumnos;
         public eva_alumnos_carreras _FicSfDataGrid_SelectItem_Alumnos;
-        public ObservableCollection<rh_cat_personas> _FicSfDataGrid_ItemSource_Persona;
-        public rh_cat_personas _FicSfDataGrid_SelectItem_Persona;
+                
         private ICommand _FicMetAddAlumnoICommand;
         private ICommand _FicMetUpdateAlumnoICommand;
         private ICommand _FicMetRemoveAlumnoICommand;
         private ICommand _FicMetViewAlumnoICommand;
-        
+
+        public rh_cat_personas _FicSfDataGrid_SelectItem_Persona;
 
 
         private IFicSrvNavegationCatEdificiosList IFicSrvNavigationCatEdificios;
@@ -44,8 +44,7 @@ namespace AppXamarinForms.ViewModels.AlumnoCarrera
             this.IFicSrvAlumnoCarreraUpdate = IFicSrvAlumnoCarreraUpdate;
            
 
-            _FicSfDataGrid_ItemSource_Alumnos = new ObservableCollection<eva_alumnos_carreras>();
-            _FicSfDataGrid_ItemSource_Persona = new ObservableCollection<rh_cat_personas>();
+            _FicSfDataGrid_ItemSource_Alumnos = new ObservableCollection<eva_alumnos_carreras>();            
         }
 
         public ObservableCollection<eva_alumnos_carreras> FicSfDataGrid_ItemSource_Alumnos
@@ -54,14 +53,7 @@ namespace AppXamarinForms.ViewModels.AlumnoCarrera
             {
                 return _FicSfDataGrid_ItemSource_Alumnos;
             }
-        }//Apunta al BindigContext al grid del view
-        public ObservableCollection<rh_cat_personas> FicSfDataGrid_ItemSource_Personas
-        {
-            get
-            {
-                return _FicSfDataGrid_ItemSource_Persona;
-            }
-        }
+        }//Apunta al BindigContext al grid del view        
 
         public eva_alumnos_carreras FicSfDataGrid_SelectItem_Alumnos
         {
@@ -171,14 +163,16 @@ namespace AppXamarinForms.ViewModels.AlumnoCarrera
             }
         }
         public async void OnAppearing()
-        {
+        {            
+            _FicSfDataGrid_SelectItem_Persona = new rh_cat_personas();            
+
             try
             {
                 var source_local_ed = await IFicSrcAlumnoCarreraList.FicMetGetListAlumnos();
                 if (source_local_ed != null)
                 {
                     foreach (eva_alumnos_carreras ed in source_local_ed)
-                    {
+                    {                        
                         _FicSfDataGrid_ItemSource_Alumnos.Add(ed);
                     }//llenar grid
                 }

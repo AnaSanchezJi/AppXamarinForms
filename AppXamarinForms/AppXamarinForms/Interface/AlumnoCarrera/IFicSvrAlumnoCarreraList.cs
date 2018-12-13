@@ -12,7 +12,7 @@ namespace AppXamarinForms.Interface.AlumnoCarrera
 {
     public interface IFicSvrAlumnoCarreraList
     {
-        Task<IEnumerable<eva_alumnos_carreras>> FicMetGetListAlumnos();
+        Task<IEnumerable<eva_alumnos_carreras>> FicMetGetListAlumnos();        
         Task<string> RemoveAlumnos(eva_alumnos_carreras eva_alumnos_carreras);
         Task<rh_cat_personas> FicMetGetListDetalleAlumnos(int c);
         Task<eva_cat_carreras> FicMetGetListCarrera(int c);
@@ -26,5 +26,6 @@ namespace AppXamarinForms.Interface.AlumnoCarrera
         Task<cat_generales> FicMetGetListGen3(int g3);
         Task<cat_generales> FicMetGetListGen4(int g4);
         Task<rh_cat_personas> FicMetGetListAlumno(int a);
+        Task<IEnumerable<eva_alumnos_carreras>> FicMetGetListAlcaBar(string FicPaAlca);
     }
 }

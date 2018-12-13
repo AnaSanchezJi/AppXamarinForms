@@ -152,5 +152,15 @@ namespace AppXamarinForms.Services.AlumnoCarrera
         {
             return await (from ed in FicLoBDContext.rh_cat_personas where ed.IdPersona == c select ed).AsNoTracking().ToListAsync();
         }
+
+        public async Task<IEnumerable<eva_alumnos_carreras>> FicMetGetListAlcaBar(string FicPaPaises)
+        {
+            var items = new List<eva_alumnos_carreras>();
+
+            items = await FicLoBDContext.eva_alumnos_carreras.Select(x => x)
+            .Where(x => x.IdAlumno.Equals(FicPaPaises) /*| x.IdCarrera.Equals(FicPaPaises) | x.IdEspecialidad.Equals(FicPaPaises)*/).ToListAsync().ConfigureAwait(false);
+
+            return items;
+        }
     }
 }
