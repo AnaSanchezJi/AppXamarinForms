@@ -11,28 +11,35 @@ using System.Windows.Input;
 using AppXamarinForms.Services.AlumnoCarrera;
 using Xamarin.Forms;
 using AppXamarinForms.Models;
+using AppXamarinForms.Services;
 
 namespace AppXamarinForms.ViewModels.AlumnoCarrera
 {
     public class FicVmAlumnoCarreraList : INotifyPropertyChanged
     {
         public ObservableCollection<eva_alumnos_carreras> _FicSfDataGrid_ItemSource_Alumnos;
-        public eva_alumnos_carreras _FicSfDataGrid_SelectItem_Alumnos;
-                
+        public eva_alumnos_carreras _FicSfDataGrid_SelectItem_Alumnos;                
         private ICommand _FicMetAddAlumnoICommand;
         private ICommand _FicMetUpdateAlumnoICommand;
         private ICommand _FicMetRemoveAlumnoICommand;
         private ICommand _FicMetViewAlumnoICommand;
 
-        public rh_cat_personas _FicSfDataGrid_SelectItem_Persona;
-
+        public eva_cat_carreras _FicSfDataGrid_SelectItem_Carrera;        
+        public eva_cat_reticulas _FicSfDataGrid_SelectItem_Reticula;
+        public eva_cat_especialidades _FicSfDataGrid_SelectItem_Especialidad;
+        public cat_periodos _FicSfDataGrid_SelectItem_Periodo1;
+        public cat_periodos _FicSfDataGrid_SelectItem_Periodo2;
+        public cat_periodos _FicSfDataGrid_SelectItem_Periodo3;
+        public cat_generales _FicSfDataGrid_SelectItem_Generales1;
+        public cat_generales _FicSfDataGrid_SelectItem_Generales2;
+        public cat_generales _FicSfDataGrid_SelectItem_Generales3;
+        public cat_generales _FicSfDataGrid_SelectItem_Generales4;
 
         private IFicSrvNavegationCatEdificiosList IFicSrvNavigationCatEdificios;
         private IFicSvrAlumnoCarreraList IFicSrcAlumnoCarreraList;
         private IFicSrvAlumnoCarreraAdd IFicSrcAlumnoCarreraAdd;
-        private IFicSrvAlumnoCarreraUpdate IFicSrvAlumnoCarreraUpdate;
-
-       
+        private IFicSrvAlumnoCarreraUpdate IFicSrvAlumnoCarreraUpdate;        
+        
         public FicVmAlumnoCarreraList(IFicSvrAlumnoCarreraList IFicSrcAlumnoCarreraList, 
             IFicSrvNavegationCatEdificiosList IFicSrvNavigationCatEdificios,
             IFicSrvAlumnoCarreraAdd IFicSrvAlumnoCarreraAdd,
@@ -41,12 +48,11 @@ namespace AppXamarinForms.ViewModels.AlumnoCarrera
             this.IFicSrvNavigationCatEdificios = IFicSrvNavigationCatEdificios;
             this.IFicSrcAlumnoCarreraList = IFicSrcAlumnoCarreraList;
             this.IFicSrcAlumnoCarreraAdd = IFicSrvAlumnoCarreraAdd;
-            this.IFicSrvAlumnoCarreraUpdate = IFicSrvAlumnoCarreraUpdate;
-           
+            this.IFicSrvAlumnoCarreraUpdate = IFicSrvAlumnoCarreraUpdate;           
 
             _FicSfDataGrid_ItemSource_Alumnos = new ObservableCollection<eva_alumnos_carreras>();            
         }
-
+        #region Observable alumno carrera
         public ObservableCollection<eva_alumnos_carreras> FicSfDataGrid_ItemSource_Alumnos
         {
             get
@@ -54,7 +60,8 @@ namespace AppXamarinForms.ViewModels.AlumnoCarrera
                 return _FicSfDataGrid_ItemSource_Alumnos;
             }
         }//Apunta al BindigContext al grid del view        
-
+        #endregion
+        #region eva_alumnos_carreras
         public eva_alumnos_carreras FicSfDataGrid_SelectItem_Alumnos
         {
             get
@@ -70,22 +77,76 @@ namespace AppXamarinForms.ViewModels.AlumnoCarrera
                 }
             }
         }////Apunta al grid seleccionado de la view
-
-        public rh_cat_personas FicSfDataGrid_SelectItem_Persona
+        #endregion
+        #region carreras
+        public eva_cat_carreras FicSfDataGrid_SelectItem_Carrera
         {
             get
             {
-                return _FicSfDataGrid_SelectItem_Persona;
+                return _FicSfDataGrid_SelectItem_Carrera;
             }
             set
             {
                 if (value != null)
                 {
-                    _FicSfDataGrid_SelectItem_Persona = value;
+                    _FicSfDataGrid_SelectItem_Carrera = value;
                     RaisePropertyChanged();
                 }
             }
         }
+        #endregion
+        #region reticula
+        public eva_cat_reticulas FicSfDataGrid_SelectItem_Reticula
+        {
+            get
+            {
+                return _FicSfDataGrid_SelectItem_Reticula;
+            }
+            set
+            {
+                if (value != null)
+                {
+                    _FicSfDataGrid_SelectItem_Reticula = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+        #endregion
+        #region especialidad
+        public eva_cat_especialidades FicSfDataGrid_SelectItem_Especialidad
+        {
+            get
+            {
+                return _FicSfDataGrid_SelectItem_Especialidad;
+            }
+            set
+            {
+                if (value != null)
+                {
+                    _FicSfDataGrid_SelectItem_Especialidad = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+        #endregion        
+       
+        /*#region Persona
+        public rh_cat_personas FicSfDataGrid_SelectItem_Persona
+        {
+            get
+            {
+                return FicSfDataGrid_SelectItem_Persona;
+            }
+            set
+            {
+                if (value != null)
+                {
+                    FicSfDataGrid_SelectItem_Persona = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+        #endregion*/
 
         public ICommand FicMetAddAlumnoICommand
         {
@@ -94,7 +155,6 @@ namespace AppXamarinForms.ViewModels.AlumnoCarrera
                 return _FicMetAddAlumnoICommand = _FicMetAddAlumnoICommand ?? new FicVmDelegateCommand(FicMetAlumnoAdd);
             }
         }//agrega el comando al boton del view
-
         private void FicMetAlumnoAdd()
         {
             IFicSrvNavigationCatEdificios.FicMetNavigateTo<FicVmAlumnoCarreraAdd>();
@@ -107,7 +167,6 @@ namespace AppXamarinForms.ViewModels.AlumnoCarrera
                 return _FicMetUpdateAlumnoICommand = _FicMetUpdateAlumnoICommand ?? new FicVmDelegateCommand(FicMetUpdateAlumno);
             }
         }
-
         private void FicMetUpdateAlumno()
         {
             if (FicSfDataGrid_SelectItem_Alumnos != null)
@@ -123,7 +182,6 @@ namespace AppXamarinForms.ViewModels.AlumnoCarrera
                 return _FicMetViewAlumnoICommand = _FicMetViewAlumnoICommand ?? new FicVmDelegateCommand(FicMetViewAlumno);
             }
         }
-
         private void FicMetViewAlumno()
         {
             if (FicSfDataGrid_SelectItem_Alumnos != null)
@@ -138,9 +196,7 @@ namespace AppXamarinForms.ViewModels.AlumnoCarrera
             {
                 return _FicMetRemoveAlumnoICommand = _FicMetRemoveAlumnoICommand ?? new FicVmDelegateCommand(FicMetRemoveAlumno);
             }
-        }
-
-        
+        }        
         private async void FicMetRemoveAlumno()
         {
             if (FicSfDataGrid_SelectItem_Alumnos != null)
@@ -162,21 +218,32 @@ namespace AppXamarinForms.ViewModels.AlumnoCarrera
 
             }
         }
+
         public async void OnAppearing()
         {            
-            _FicSfDataGrid_SelectItem_Persona = new rh_cat_personas();            
+            _FicSfDataGrid_SelectItem_Carrera = new eva_cat_carreras();
+            _FicSfDataGrid_SelectItem_Reticula = new eva_cat_reticulas();
+            _FicSfDataGrid_SelectItem_Especialidad = new eva_cat_especialidades();
+            
 
             try
             {
                 var source_local_ed = await IFicSrcAlumnoCarreraList.FicMetGetListAlumnos();
                 if (source_local_ed != null)
-                {
+                {                    
                     foreach (eva_alumnos_carreras ed in source_local_ed)
-                    {                        
+                    {
+                       
+                        _FicSfDataGrid_SelectItem_Carrera = await IFicSrcAlumnoCarreraList.FicMetGetListCarrera(ed.IdCarrera);
+                        _FicSfDataGrid_SelectItem_Reticula = await IFicSrcAlumnoCarreraList.FicMetGetListReticula(ed.IdReticula);
+                        _FicSfDataGrid_SelectItem_Especialidad = await IFicSrcAlumnoCarreraList.FicMetGetListEspecialidad(ed.IdEspecialidad);
+                        
+                        ed.carreras = _FicSfDataGrid_SelectItem_Carrera;
+                        ed.eva_cat_reticulas = _FicSfDataGrid_SelectItem_Reticula;
+                        ed.eva_cat_especialidades = _FicSfDataGrid_SelectItem_Especialidad;
                         _FicSfDataGrid_ItemSource_Alumnos.Add(ed);
                     }//llenar grid
                 }
-
             }
             catch (Exception e)
             {

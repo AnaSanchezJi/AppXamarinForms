@@ -473,7 +473,7 @@ namespace AppXamarinForms.ViewModels.AlumnoCarrera
         public async void OnAppearing()
         {
             var source_eva_alumnos_carreras = FicNavigationContextC as eva_alumnos_carreras;
-            rh_cat_personas cat_aux = ficSvrAlumnoCarreraList.FicMetGetListAlumno(source_eva_alumnos_carreras.IdAlumno).Result;
+            rh_cat_personas cat_aux = ficSvrAlumnoCarreraList.FicMetGetListPersona(source_eva_alumnos_carreras.IdAlumno).Result;
             eva_cat_carreras carreras = ficSvrAlumnoCarreraList.FicMetGetListCarrera(source_eva_alumnos_carreras.IdCarrera).Result;
             eva_cat_reticulas reti = ficSvrAlumnoCarreraList.FicMetGetListReticula(source_eva_alumnos_carreras.IdReticula).Result;
             eva_cat_especialidades espe = ficSvrAlumnoCarreraList.FicMetGetListEspecialidad(source_eva_alumnos_carreras.IdEspecialidad).Result;

@@ -71,19 +71,23 @@ namespace AppXamarinForms.Data
 
 
                 //LLaves foraneas
-                //modelBuilder.Entity<eva_alumnos_carreras>().HasOne(s => s.rh_cat_alumnos).WithMany().HasForeignKey(s => s.IdAlumno);
-                //modelBuilder.Entity<eva_alumnos_carreras>().HasOne(s => s.carreras).WithMany().HasForeignKey(s => s.IdCarrera);
+                modelBuilder.Entity<eva_alumnos_carreras>().HasOne(s => s.rh_cat_personas).WithMany().HasForeignKey(s => s.IdAlumno);
+                modelBuilder.Entity<eva_alumnos_carreras>().HasOne(s => s.carreras).WithMany().HasForeignKey(s => s.IdCarrera);
                 modelBuilder.Entity<eva_alumnos_carreras>().HasOne(s => s.eva_cat_reticulas).WithMany().HasForeignKey(s => s.IdReticula);
                 modelBuilder.Entity<eva_alumnos_carreras>().HasOne(s => s.eva_cat_especialidades).WithMany().HasForeignKey(s => s.IdEspecialidad);
                 modelBuilder.Entity<eva_alumnos_carreras>().HasOne(s => s.cat_periodosI).WithMany().HasForeignKey(s => s.IdPeriodoIngreso);
                 modelBuilder.Entity<eva_alumnos_carreras>().HasOne(s => s.cat_periodosU).WithMany().HasForeignKey(s => s.IdPeriodoUltimo);
                 modelBuilder.Entity<eva_alumnos_carreras>().HasOne(s => s.cat_periodosT).WithMany().HasForeignKey(s => s.IdPeriodoTitulacion);
+
                 modelBuilder.Entity<eva_alumnos_carreras>().HasOne(s => s.tipo_generalI).WithMany().HasForeignKey(s => s.IdTipoGenIngreso);
                 modelBuilder.Entity<eva_alumnos_carreras>().HasOne(s => s.generalI).WithMany().HasForeignKey(s => s.IdGenIngreso);
+
                 modelBuilder.Entity<eva_alumnos_carreras>().HasOne(s => s.tipo_generalNE).WithMany().HasForeignKey(s => s.IdTipoGenNivelEscolar);
                 modelBuilder.Entity<eva_alumnos_carreras>().HasOne(s => s.generalNE).WithMany().HasForeignKey(s => s.IdGenNivelEscolar);
+
                 modelBuilder.Entity<eva_alumnos_carreras>().HasOne(s => s.tipo_generalT).WithMany().HasForeignKey(s => s.IdTipoGenOpcionTitulacion);
                 modelBuilder.Entity<eva_alumnos_carreras>().HasOne(s => s.generalT).WithMany().HasForeignKey(s => s.IdGenOpcionTitulacion);
+
                 modelBuilder.Entity<eva_alumnos_carreras>().HasOne(s => s.tipo_generalPE).WithMany().HasForeignKey(s => s.IdTipoGenPlanEstudio);
                 modelBuilder.Entity<eva_alumnos_carreras>().HasOne(s => s.generalPE).WithMany().HasForeignKey(s => s.IdGenPlanEstudio);
                 

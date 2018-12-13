@@ -64,10 +64,9 @@
                 SelectedItem="{Binding FicSfDataGrid_SelectItem_Alumnos}"
                 SelectionMode="Single">
                 <syncfusion:SfDataGrid.Columns x:TypeArguments="syncfusion:Columns">
-                    <syncfusion:GridTextColumn HeaderFontAttribute="Bold" HeaderText="Id Carrera" MappingName="IdCarrera"/>
-                    <syncfusion:GridTextColumn HeaderFontAttribute="Bold" HeaderText="Id Alumno" MappingName="IdAlumno"/>
-                    <syncfusion:GridTextColumn HeaderFontAttribute="Bold" HeaderText="Id Reticula" MappingName="IdReticula"/>
-                    <syncfusion:GridTextColumn HeaderFontAttribute="Bold" HeaderText="Id Especicialidad" MappingName="IdEspecialidad"/>
+                    <syncfusion:GridTextColumn HeaderFontAttribute="Bold" HeaderText="Carrera" MappingName="carreras.DesCarrera"/>
+                    <syncfusion:GridTextColumn HeaderFontAttribute="Bold" HeaderText="Reticula" MappingName="eva_cat_reticulas.DesReticula"/>
+                    <syncfusion:GridTextColumn HeaderFontAttribute="Bold" HeaderText="Especicialidad" MappingName="eva_cat_especialidades.DesEspecialidad"/>
                 </syncfusion:SfDataGrid.Columns>
             </syncfusion:SfDataGrid>
         </StackLayout>
