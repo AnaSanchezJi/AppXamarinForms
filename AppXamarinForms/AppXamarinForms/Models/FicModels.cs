@@ -63,6 +63,7 @@ namespace AppXamarinForms.Models
     {
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public Int32 IdPersona { get; set; }
+        public rh_cat_alumnos rh_cat_alumnos { get; set; }
         public Int16 IdInstituto { get; set; }
         public string Nombre { get; set; }
         public string ApPaterno { get; set; }
