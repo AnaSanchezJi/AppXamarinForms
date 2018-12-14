@@ -998,59 +998,69 @@ namespace AppXamarinForms.ViewModels.AlumnoCarrera
         private async void SaveCommandExecute()
         {
             try
-            {               
+            {
+
                 var RespuestaInsert = await IFicSrvAlumnoCarreraAdd.InsertAlumnos(new eva_alumnos_carreras()
-                    {
-                        IdCarrera = Convert.ToInt16(CaIndex+1),
-                        IdAlumno = Convert.ToInt16(AlIndex+1),
-                        IdReticula = Convert.ToInt16(ReIndex+1),
-                        IdEspecialidad = Convert.ToInt16(EsIndex +1),
+                {
+                    IdCarrera = Convert.ToInt16(CaIndex + 1),
+                    IdAlumno = Convert.ToInt16(AlIndex + 1),
+                    IdReticula = Convert.ToInt16(ReIndex + 1),
+                    IdEspecialidad = Convert.ToInt16(EsIndex + 1),
 
-                        FechaIngreso = LabelFechaIngreso,
-                        FechaEgreso = LabelFechaEgreso,
-                        FechaTitulacion = LabelFechaTitulacion,
-                        FechaUltModSII = LabelFechaUltModSII,
+                    FechaIngreso = LabelFechaIngreso,
+                    FechaEgreso = LabelFechaEgreso,
+                    FechaTitulacion = LabelFechaTitulacion,
+                    FechaUltModSII = LabelFechaUltModSII,
 
-                        PromedioActual = LabelPromedioActual,
-                        PromedioPeriodoAnt = LabelPromedioPeriodoAnt,
-                        PromedioFinal = LabelPromedioFinal,
-                        CreditosAprobados = LabelCreditosAprobados,
-                        CreditosCursados = LabelCreditosCursados,
-                        TotalPuntosVigentes = LabelTotalPuntosVigentes,
-                        TotalPuntosGenerados = LabelTotalPuntosGenerados,
-                        SemestreActual = LabelSemestreActual,
+                    PromedioActual = LabelPromedioActual,
+                    PromedioPeriodoAnt = LabelPromedioPeriodoAnt,
+                    PromedioFinal = LabelPromedioFinal,
+                    CreditosAprobados = LabelCreditosAprobados,
+                    CreditosCursados = LabelCreditosCursados,
+                    TotalPuntosVigentes = LabelTotalPuntosVigentes,
+                    TotalPuntosGenerados = LabelTotalPuntosGenerados,
+                    SemestreActual = LabelSemestreActual,
 
-                        IdPeriodoIngreso = Convert.ToInt16(P1Index + 1),
-                        IdPeriodoUltimo = Convert.ToInt16(P2Index +1),
-                        IdPeriodoTitulacion = Convert.ToInt16(P3Index +1),
+                    IdPeriodoIngreso = Convert.ToInt16(P1Index + 1),
+                    IdPeriodoUltimo = Convert.ToInt16(P2Index + 1),
+                    IdPeriodoTitulacion = Convert.ToInt16(P3Index + 1),
 
-                        IdTipoGenPlanEstudio = 25,
-                        IdGenPlanEstudio = Convert.ToInt16(G1Index + 1),
-                        IdTipoGenOpcionTitulacion = 27,
-                        IdGenOpcionTitulacion = Convert.ToInt16(G2Index+1),
-                        IdTipoGenNivelEscolar = 17,
-                        IdGenNivelEscolar = Convert.ToInt16(G3Index+1),
-                        IdTipoGenIngreso = 28,
-                        IdGenIngreso = Convert.ToInt16(G4Index+1),
+                    IdTipoGenPlanEstudio = 25,
+                    IdGenPlanEstudio = Convert.ToInt16(G1Index + 1),
+                    IdTipoGenOpcionTitulacion = 27,
+                    IdGenOpcionTitulacion = Convert.ToInt16(G2Index + 1),
+                    IdTipoGenNivelEscolar = 17,
+                    IdGenNivelEscolar = Convert.ToInt16(G3Index + 1),
+                    IdTipoGenIngreso = 28,
+                    IdGenIngreso = Convert.ToInt16(G4Index + 1),
 
-                        Activo = LabelActivo,
-                        Borrado = LabelBorrado,
-                        FechaReg = DateTime.Now,
-                        UsuarioReg = "root",
-                        FechaUltMod = DateTime.Now,
-                        UsuarioMod = ""
-                    });
+                    Activo = LabelActivo,
+                    Borrado = LabelBorrado,
+                    FechaReg = DateTime.Now,
+                    UsuarioReg = "root",
+                    FechaUltMod = DateTime.Now,
+                    UsuarioMod = ""
+                });
 
+                /*if (LabelPromedioActual < 0 && LabelPromedioActual > 100)
+                {
+                    await new Page().DisplayAlert("Error", "¡Promedio Invalido!", "OK");
+                }
+                else
+                {*/
                     if (RespuestaInsert == "OK")
                     {
                         await new Page().DisplayAlert("ADD", "¡INSERTADO CON EXITO!", "OK");
                         IFicSrvNavigationEdificiosList.FicMetNavigateTo<FicVmAlumnoCarreraList>(FicNavigationContextC);
-                    }else { await new Page().DisplayAlert("ADD", RespuestaInsert.ToString(), "OK"); }//SE INSERTO EL CONTEO?                
+                    }
+                    else { await new Page().DisplayAlert("ADD", RespuestaInsert.ToString(), "OK"); }//SE INSERTO EL CONTEO?                
+                //}
             }
             catch (Exception e)
             {
                 await new Page().DisplayAlert("ALERTA", e.Message.ToString(), "OK");
             }//MANEJO GLOBAL DE ERRORES
+
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

@@ -129,24 +129,7 @@ namespace AppXamarinForms.ViewModels.AlumnoCarrera
             }
         }
         #endregion        
-       
-        /*#region Persona
-        public rh_cat_personas FicSfDataGrid_SelectItem_Persona
-        {
-            get
-            {
-                return FicSfDataGrid_SelectItem_Persona;
-            }
-            set
-            {
-                if (value != null)
-                {
-                    FicSfDataGrid_SelectItem_Persona = value;
-                    RaisePropertyChanged();
-                }
-            }
-        }
-        #endregion*/
+              
 
         public ICommand FicMetAddAlumnoICommand
         {
@@ -154,7 +137,7 @@ namespace AppXamarinForms.ViewModels.AlumnoCarrera
             {
                 return _FicMetAddAlumnoICommand = _FicMetAddAlumnoICommand ?? new FicVmDelegateCommand(FicMetAlumnoAdd);
             }
-        }//agrega el comando al boton del view
+        }
         private void FicMetAlumnoAdd()
         {
             IFicSrvNavigationCatEdificios.FicMetNavigateTo<FicVmAlumnoCarreraAdd>();

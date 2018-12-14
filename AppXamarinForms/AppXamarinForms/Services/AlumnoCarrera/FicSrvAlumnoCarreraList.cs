@@ -37,8 +37,7 @@ namespace AppXamarinForms.Services.AlumnoCarrera
             });
             return asignaturaItem;
         }
-      
-       
+             
         public async Task<eva_cat_especialidades> FicMetGetListEspecialidad(int es)
         {
             List<eva_cat_especialidades> aux = await(from asignatura in FicLoBDContext.eva_cat_especialidades select asignatura).Where((asignatura) => asignatura.IdEspecialidad == es).AsNoTracking().ToListAsync();
@@ -140,7 +139,7 @@ namespace AppXamarinForms.Services.AlumnoCarrera
             var items = new List<eva_alumnos_carreras>();
 
             items = await FicLoBDContext.eva_alumnos_carreras.Select(x => x)
-            .Where(x => x.IdAlumno.Equals(FicPaPaises) /*| x.IdCarrera.Equals(FicPaPaises) | x.IdEspecialidad.Equals(FicPaPaises)*/).ToListAsync().ConfigureAwait(false);
+            .Where(x => x.carreras.DesCarrera.Equals(FicPaPaises) /*| x.IdCarrera.Equals(FicPaPaises) | x.IdEspecialidad.Equals(FicPaPaises)*/).ToListAsync().ConfigureAwait(false);
 
             return items;
         }
