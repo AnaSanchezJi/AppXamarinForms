@@ -65,6 +65,7 @@
                 SelectionMode="Single">
                 <syncfusion:SfDataGrid.Columns x:TypeArguments="syncfusion:Columns">
                     <syncfusion:GridTextColumn HeaderFontAttribute="Bold" HeaderText="Alumno" MappingName="IdAlumno"/>
+                    <syncfusion:GridTextColumn HeaderFontAttribute="Bold" HeaderText="Alumno" MappingName="rh_cat_personas.Nombre"/>
                     <syncfusion:GridTextColumn HeaderFontAttribute="Bold" HeaderText="Carrera" MappingName="carreras.DesCarrera"/>
                     <syncfusion:GridTextColumn HeaderFontAttribute="Bold" HeaderText="Reticula" MappingName="eva_cat_reticulas.DesReticula"/>
                     <syncfusion:GridTextColumn HeaderFontAttribute="Bold" HeaderText="Especicialidad" MappingName="eva_cat_especialidades.DesEspecialidad"/>
